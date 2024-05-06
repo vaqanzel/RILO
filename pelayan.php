@@ -75,7 +75,7 @@
                                 Input Detail Pesanan
                             </a>
                       </nav>
-                  </div>
+                    </div>
                   
                   <div id="layoutSidenav_content">
                     <main>

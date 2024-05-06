@@ -1,11 +1,5 @@
 <?php
 include "./koneksi.php";
-
-if(isset($_GET['idPembeli'])){
-$id = $_GET['idPembeli'];
-mysqli_query($con,"DELETE FROM pembeli WHERE idPembeli = $id");
-
-}
 ?>
   
 <!DOCTYPE html>
@@ -84,7 +78,7 @@ mysqli_query($con,"DELETE FROM pembeli WHERE idPembeli = $id");
                                 <div class="sb-nav-link-icon"style="color :#AF06B8 "><i class="fas fa-book-open"></i></div>
                                 Input Detail Pesanan
                             </a>
-                      </nav>
+                </nav>
                   </div>
                   
                   <div id="layoutSidenav_content">
