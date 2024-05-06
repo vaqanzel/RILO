@@ -127,7 +127,7 @@ mysqli_query($con,"DELETE FROM pembeli WHERE idPembeli = $id");
             <?php 
                 include "./koneksi.php";
                 $no = 1;
-                $qrec = mysqli_query($con, "SELECT * FROM pembeli WHERE idPembeli");
+                $qrec = mysqli_query($con, "SELECT * FROM pembeli");
                 while ($rec = mysqli_fetch_array($qrec))
                 {            
             ?>
@@ -135,8 +135,8 @@ mysqli_query($con,"DELETE FROM pembeli WHERE idPembeli = $id");
                 <th scope="row"><?= $no ?></th>
                 <td><?= $rec['idPembeli'] ?></td>
                 <td><?= $rec['nama_pembeli'] ?></td>
-                <td><a href="updatepembeli.php?idPembeli=<?= $rec[0] ?>"> Edit</a> </td>
-                <td><a href="data.php?idPembeli=<?= $rec[0] ?>"> Delete </a> </td>
+                <td><a href="updatepembeli.php?idPembeli=<?= $rec["idPembeli"] ?>"> Edit</a> </td>
+                <td><a href="data.php?idPembeli=<?= $rec["idPembeli"] ?>"> Delete </a> </td>
             </tr>
             <?php $no++; } ?>
         </tbody>

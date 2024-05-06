@@ -60,4 +60,12 @@ if (isset($_POST['btnSimpan'])){
       echo '<script> window.alert("Data Gagal Disimpan"); window.location.href=""; </script>';
   }
 }
+
+// DELETE PELAYAN
+if(isset($_GET['idPelayan'])){
+  //DEKLARASI VARIABEL
+  $id = $_GET['idPelayan'];
+  mysqli_query($con, "DELETE FROM pelayan WHERE idPelayan = '$id' ");
+  header("location:pelayan.php");
+}
         
