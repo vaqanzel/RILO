@@ -1,3 +1,13 @@
+<?php
+include "./koneksi.php";
+
+// Menghapus Menu
+if(isset($_GET['idMenu'])){
+    $id = $_GET['idMenu'];
+    mysqli_query($con, "DELETE FROM menu WHERE idMenu = $id");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -91,10 +101,6 @@
               <form role="form" action="data.php" class="text-start" method="POST">
                 <div class="input-group input-group-outline mb-3">
                   <label class="form-label"></label>
-                  <input id="idMenu" type="text" class="form-control" name="idMenu" placeholder="ID Menu" autofocus>
-                </div>
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label"></label>
                   <input id="idMenu" type="text" class="form-control" name="namaMenu" placeholder="Nama Menu" autofocus>
                 </div>
                 <div class="input-group input-group-outline mb-3">
@@ -102,14 +108,25 @@
                   <input id="idMenu" type="text" class="form-control" name="Harga" placeholder="Harga" autofocus>
                 </div>
                 <div class="input-group input-group-outline mb-3">
-                  <label class="form-label"></label>
-                  <input id="idMenu" type="text" class="form-control" name="idKategoriMenu" placeholder="ID Kategori Menu" autofocus>
+                    <select name="idKategoriMenu" class="custom-select">
+                        <option selected>Pilih Kategori Menu</option>
+                        <?php
+                        $qkat = mysqli_query($con,"SELECT * FROM kategorimenu ORDER BY namaKategori ASC");
+                        while ($rkat= mysqli_fetch_array($qkat)){
+                        ?>
+
+                        <option value="<?= $rkat['idKategoriMenu'] ?>" ><?= $rkat['namaKategori'] ?></option>
+
+                        <?php
+                        }
+                        ?>
+                    </select>
                 </div>
                 
                 <div class="footer mb-5">
                     <button type="reset" class="btn btn-danger float-end"><i class="bi-x-circle"></i>
                         Batal</button>
-                    <button type="submit" name="btnSimpan"  style="background-color : #AF06B8" class="btn float-end text-white me-1" ><i class="bi-save"></i>
+                    <button type="submit" name="btnSimpanMenu"  style="background-color : #AF06B8" class="btn float-end text-white me-1" ><i class="bi-save"></i>
                         Simpan</button>
                 </div>
 
@@ -119,27 +136,28 @@
         <table class="table mt-3">
         <thead>
             <tr>
+            <th scope="col">NO</th>
             <th scope="col">ID Menu</th>
             <th scope="col">Nama Menu</th>
             <th scope="col">Harga</th>
-            <th scope="col">ID Kategori Menu</th>
+            <th scope="col">ID Kategori Menu</th> 
             <th scope="col"colspan=2>Opsi</th>
             </tr>
            </thead>
         <tbody>
             <?php 
-                include "./koneksi.php";
                 $no = 1;
-                $qrec = mysqli_query($con, "SELECT * FROM pembeli WHERE idPembeli");
-                while ($rec = mysqli_fetch_array($qrec))
-                {            
+                $qrec = mysqli_query($con, "SELECT menu.*, kategorimenu.namaKategori FROM menu LEFT JOIN kategorimenu ON menu.idKategoriMenu = kategorimenu.idKategoriMenu");
+                while ($rec = mysqli_fetch_array($qrec)) {            
             ?>
             <tr>
                 <th scope="row"><?= $no ?></th>
-                <td><?= $rec['idPembeli'] ?></td>
-                <td><?= $rec['nama_pembeli'] ?></td>
-                <td><a href="updatepembeli.php?idPembeli=<?= $rec[0] ?>"> Edit</a> </td>
-                <td><a href="data.php?idPembeli=<?= $rec[0] ?>"> Delete </a> </td>
+                <td><?= $rec['idMenu'] ?></td>
+                <td><?= $rec['namaMenu'] ?></td>
+                <td><?= $rec['Harga'] ?></td>
+                <td><?= $rec['idKategoriMenu'] ?></td>
+                <td><a href="updatemenu.php?idMenu=<?= $rec[0] ?>"> Edit</a> </td>
+                <td><a href="data.php?idMenu=<?= $rec['idMenu'] ?>"> Delete </a> </td>
             </tr>
             <?php $no++; } ?>
         </tbody>

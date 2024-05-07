@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -109,7 +110,7 @@
                 <div class="footer mb-5">
                     <button type="reset" class="btn btn-danger float-end"><i class="bi-x-circle"></i>
                         Batal</button>
-                    <button type="submit" name="btnSimpan"  style="background-color : #AF06B8" class="btn float-end text-white me-1" ><i class="bi-save"></i>
+                    <button type="submit" name="btnSimpanPelayan"  style="background-color : #AF06B8" class="btn float-end text-white me-1" ><i class="bi-save"></i>
                         Simpan</button>
                 </div>
 
