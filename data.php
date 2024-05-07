@@ -58,7 +58,6 @@ if(isset($_POST['btnSimpanPelayan'])) {
         echo '<script> window.alert("Data Gagal Disimpan"); window.location.href=""; </script>';
     }
 }
-
 // Update Pelayan
 if(isset($_POST['btnUpdatePelayan'])) {
   $id = $_POST['idPelayan'];

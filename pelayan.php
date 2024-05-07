@@ -76,7 +76,7 @@
                                 Input Detail Pesanan
                             </a>
                       </nav>
-                  </div>
+                    </div>
                   
                   <div id="layoutSidenav_content">
                     <main>
@@ -143,7 +143,7 @@
                 <td><?= $rec['alamat'] ?></td>
                 <td><?= $rec['noTelp'] ?></td>
                 <td><a href="updatepelayan.php?idPelayan=<?= $rec[0] ?>"> Edit</a> </td>
-                <td><a href="data.php?idPelayan=<?= $rec[0] ?>"> Delete </a> </td>
+                <td><a href="data.php?idPelayan=<?= $rec["idPelayan"] ?>"> Delete </a> </td>
             </tr>
             <?php $no++; } ?>
         </tbody>
