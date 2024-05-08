@@ -4,10 +4,37 @@ include '../assets/header.php';
 function getPelayanOptions($koneksi) {
     $result = mysqli_query($koneksi, "SELECT * FROM pelayan");
     $options = "";
-    while ($row = mysqli_fetch_array($result)) {
+    while ($row = mysqli_fetch_assoc($result)) {
         $options .= '<option value="'. $row['idPelayan']. '">'. $row['nama'] . '</option>';
     }
     return $options;
+}
+
+function getMenuOptions($koneksi) {
+    $result = mysqli_query($koneksi, "SELECT * FROM menu");
+    $options = "";
+    while ($row = mysqli_fetch_assoc($result)) {
+        $options .= '<option value="' . $row['idMenu'] . '">' . $row['namaMenu'] . '</option>';
+    }
+    return $options;
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nama_pembeli = $_POST['nama_pembeli'];
+    $idPelayan = $_POST['$idPelayan'];
+    $idMenu = $_POST['idMenu'];
+
+    $idPesanan = substr(md5(uniqid()), 0, 5);
+
+    $tanggalPesanan = date('Y-m-d');
+
+    $sql_insert_pembeli = "INSERT INTO pembeli (nama_pembeli) VALUES ('$nama_pembeli)";
+    mysqli_query($koneksi, $sql_insert_pembeli);
+
+    $sql_insert_pesanan = "INSERT INTO pesanan (idPesanan, tanggalPesanan, idPembeli, idPelayan)
+                            VALUES ('$idPesanan', '$tanggalPesanan', (SELECT idPembeli FROM pembeli WHERE nama_pembeli = '$nama_pembeli'), '$idPelayan')";  
+    
+    mysqli_query($koneksi, $sql_insert_pesanan);
 }
 ?>
 
@@ -27,7 +54,7 @@ function getPelayanOptions($koneksi) {
                         <h5 class="modal-title" id="exampleModalLabel">Input Pesanan</h5>
                       </div>
                       <div class="modal-body">
-                      <form role="form" action="data.php" class="text-start" method="POST">
+                      <form role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="text-start" method="POST">
                         <div class="input-group input-group-outline mb-3">
                             <label class="form-label"></label>
                             <input id="idPembeli" type="text" class="form-control" name="nama_pembeli" placeholder="Nama Pembeli" autofocus>

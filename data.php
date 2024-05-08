@@ -89,7 +89,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['idPelay
   }
 }
 
-mysqli_close($con);
+// mysqli_close($con);
 
 
 //Menghapus Menu
@@ -117,4 +117,42 @@ if (isset($_POST['btnSimpanMenu'])){
       echo '<script> window.alert("Data Gagal Disimpan"); window.location.href=""; </script>';
   }
 }
+
+// Tambah data kategori menu
+if (isset($_POST['btnSimpanKategori'])) {
+    //DEKLARASI VARIABLE
+    $idKategoriMenu = $_POST['idKategoriMenu'];
+    $namaKategori = $_POST['namaKategori'];
+
+    //QUERY PERINTAH INPUT DATA
+    $qinput = mysqli_query($con,"INSERT INTO kategorimenu (idKategoriMenu, namaKategori) VALUES ('$idKategoriMenu','$namaKategori')");
+    header("location:kategorimenu.php");
+    //NOTIFIKASI
+    if($qinput)
+    {
+        // NOTIF BERHASIL
+        echo '<script> window.alert("Data Berhasil Disimpan"); window.location.href=""; </script>';
+    } else
+    {
+        //NOTIF GAGAL
+        echo '<script> window.alert("Data Gagal Disimpan"); window.location.href=""; </script>';
+    }
+}
+
+// DELETE Kategori Menu
+if(isset($_GET['idKategoriMenu'])){
+    //DEKLARASI VARIABEL
+    $idKategoriMenu = $_GET['idKategoriMenu'];
+    mysqli_query($con, "DELETE FROM kategorimenu WHERE idKategoriMenu = $idKategoriMenu ");
+    header("location:kategorimenu.php");
+  }
+// UPDATE Kategori Menu
+if(isset($_POST['UpKategori'])){
+  $idKategoriMenu = $_POST['idKategoriMenu'];
+  $namaKategori = $_POST['namaKategori'];
+
+ mysqli_query($con, "UPDATE kategorimenu SET namaKategori = '$namaKategori', idKategoriMenu = '$idKategoriMenu' WHERE idKategoriMenu = $idKategoriMenu ");
+ header("location: kategorimenu.php");
+}
+
 ?>
