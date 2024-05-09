@@ -3,7 +3,7 @@ include "./koneksi.php";
 
 
 // tampil update kategori menu
-$data = mysqli_query($con, "SELECT * FROM kategorimenu WHERE idKategoriMenu='$_GET[idKategoriMenu]'");
+$data = mysqli_query($con, "SELECT * FROM metodepembayaran WHERE idMetodePembayaran='$_GET[idMetodePembayaran]'");
 $datashow = mysqli_fetch_array($data);
 
 ?>
@@ -89,29 +89,29 @@ $datashow = mysqli_fetch_array($data);
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h4 class="mt-4" style="color :#AF06B8 ">Input Menu</h4>
+                                <h4 class="mt-4" style="color :#AF06B8 ">Metode Pembayaran</h4>
                                 <div class="d-flex align-items-center justify-content-between small">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    Input Kategori Menu
+                                    Input Metode Pembayaran
                                 </button>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                       <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Input Pesanan</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Input Metode Pembayaran</h5>
                                       </div>
                                       <div class="modal-body">
                                       <form role="form" action="data.php" class="text-start" method="POST">
                                         <div class="input-group input-group-outline mb-3">
                                             <label class="form-label"></label>
-                                            <input id="idKategoriMenu" type="text" class="form-control" name="idKategoriMenu" placeholder="ID Kategori Menu" autofocus>
+                                            <input id="idMetodePembayaran" type="text" class="form-control" name="idMetodePembayaran" placeholder="ID Metode Pembayaran" autofocus>
                                         </div>
                                         <div class="input-group input-group-outline mb-3">
                                             <label class="form-label"></label>
-                                            <input id="namaKategori" type="text" class="form-control" name="namaKategori" placeholder="Nama Kategori" autofocus>
+                                            <input id="metodePembayaran" type="text" class="form-control" name="metodePembayaran" placeholder="Metode Pembayaran" autofocus>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" name="btnSimpanKategori"  style="background-color : #AF06B8" class="btn float-end text-white me-1" ><i class="bi-save"></i>Simpan</button>
+                                            <button type="submit" name="btnSimpanMetode"  style="background-color : #AF06B8" class="btn float-end text-white me-1" ><i class="bi-save"></i>Simpan</button>
                                             <button type="button" class="btn btn-danger float-end" data-bs-dismiss="modal"><i class="bi-x-circle"></i> Batal</button>
                                         </div>
                                       </form>
@@ -119,7 +119,7 @@ $datashow = mysqli_fetch_array($data);
                                     </div>
                                   </div>
                                 </div>
-                                <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true" value="kategorimenu.php?idKategoriMenu=<?php echo $rec['idKategoriMenu'] ?>">
+                                <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                       <div class="modal-header">
@@ -158,23 +158,23 @@ $datashow = mysqli_fetch_array($data);
                                     <thead>
                                         <tr>
                                             <th scope="col">NO</th>
-                                            <th scope="col">ID Kategori Menu</th>
-                                            <th scope="col">Nama Kategori Menu</th>
+                                            <th scope="col">ID Metode Pembayaran</th>
+                                            <th scope="col">Nama Metode Pembayaran</th>
                                             <th scope="col"colspan=2>Opsi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
                                             $no = 1;
-                                            $qrec = mysqli_query($con, "SELECT * FROM kategorimenu");
+                                            $qrec = mysqli_query($con, "SELECT * FROM metodepembayaran");
                                             while ($rec = mysqli_fetch_array($qrec)) {            
                                         ?>
                                         <tr>
                                             <th scope="row"><?= $no ?></th>
-                                            <td><?= $rec['idKategoriMenu'] ?></td>
-                                            <td><?= $rec['namaKategori'] ?></td>
-                                            <td><a href="kategorimenu.php?idKategoriMenu=<?php echo $rec['idKategoriMenu']; ?>" data-bs-target="#updateModal" data-bs-toggle="modal" > Edit</a> </td>
-                                            <td><a href="data.php?idKategoriMenu=<? $rec['idKategoriMenu'] ?>"> Delete </a> </td>
+                                            <td><?= $rec['idMetodePembayaran'] ?></td>
+                                            <td><?= $rec['metodePembayaran'] ?></td>
+                                            <td><a href="kategorimenu.php?idKategoriMenu=<?php echo $rec['idKategoriMenu']; ?>" data-bs-target="#updateModal" data-bs-toggle="modal" value="<? echo $rec['idKategoriMenu']; ?>" > Edit</a> </td>
+                                            <td><a href="data.php?idKategoriMenu=<?= $rec['idKategoriMenu'] ?>"> Delete </a> </td>
                                         </tr>
                                         <?php $no++; } ?>
                                     </tbody>

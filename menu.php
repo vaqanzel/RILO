@@ -140,7 +140,7 @@ if(isset($_GET['idMenu'])){
             <th scope="col">ID Menu</th>
             <th scope="col">Nama Menu</th>
             <th scope="col">Harga</th>
-            <th scope="col">ID Kategori Menu</th> 
+            <th scope="col">Kategori Menu</th> 
             <th scope="col"colspan=2>Opsi</th>
             </tr>
            </thead>
@@ -155,7 +155,7 @@ if(isset($_GET['idMenu'])){
                 <td><?= $rec['idMenu'] ?></td>
                 <td><?= $rec['namaMenu'] ?></td>
                 <td><?= $rec['Harga'] ?></td>
-                <td><?= $rec['idKategoriMenu'] ?></td>
+                <td><?= $rec['namaKategori'] ?></td>
                 <td><a href="updatemenu.php?idMenu=<?= $rec[0] ?>"> Edit</a> </td>
                 <td><a href="data.php?idMenu=<?= $rec['idMenu'] ?>"> Delete </a> </td>
             </tr>

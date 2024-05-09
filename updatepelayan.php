@@ -1,25 +1,32 @@
 <?php
 include "./koneksi.php";
 
+// if(isset($_GET['idPelayan'])) {
+//     $id = $_GET['idPelayan'];
+//     if(strlen($id) != 5) {
+//         echo "ID pelayan tidak valid.";
+//         exit; 
+//     }
+    
+//     $qPelayan = mysqli_query($con,"SELECT * FROM pelayan WHERE idPelayan = '$id'");
+    
+//     if(mysqli_num_rows($qPelayan) > 0) {
+//         $recPelayan = mysqli_fetch_array($qPelayan);
+//     } else {
+//         echo "Data pelayan tidak ditemukan.";
+//         exit; 
+//     }
+// } else {
+//     echo "ID pelayan tidak ditemukan.";
+//     exit; 
+// }
+
 if(isset($_GET['idPelayan'])) {
     $id = $_GET['idPelayan'];
-    if(strlen($id) != 5) {
-        echo "ID pelayan tidak valid.";
-        exit; 
-    }
-    
-    $qPelayan = mysqli_query($con,"SELECT * FROM pelayan WHERE idPelayan = '$id'");
-    
-    if(mysqli_num_rows($qPelayan) > 0) {
-        $recPelayan = mysqli_fetch_array($qPelayan);
-    } else {
-        echo "Data pelayan tidak ditemukan.";
-        exit; 
-    }
-} else {
-    echo "ID pelayan tidak ditemukan.";
-    exit; 
+    $qPelayan = mysqli_query($con,"SELECT * FROM pelayan WHERE idPelayan ='$id'");
+    $recPelayan = mysqli_fetch_array($qPelayan);
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -130,7 +137,7 @@ if(isset($_GET['idPelayan'])) {
                 <label for="noTelp" class="form-label">Nomor Telepon</label>
                 <input type="text" class="form-control" id="noTelp" name="noTelp" value="<?= $recPelayan['noTelp'] ?>">
             </div>
-            <button type="submit" class="btn btn-primary">Update Pelayan</button>
+            <button type="submit" class="btn btn-primary" name="btnUpdatePelayan" value="Update Pelayan">Update Pelayan</button>
         </form>
     </div>
                             </div>
