@@ -1,11 +1,5 @@
 <?php
 include "../koneksi.php";
-
-
-// tampil update kategori menu
-$data = mysqli_query($con, "SELECT * FROM kategorimenu WHERE idKategoriMenu='$_GET[idKategoriMenu]'");
-$datashow = mysqli_fetch_array($data);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -114,7 +108,7 @@ $datashow = mysqli_fetch_array($data);
                                                     $qkat = mysqli_query($con,"SELECT * FROM pembeli ORDER BY nama_pembeli ASC");
                                                     while ($rkat= mysqli_fetch_array($qkat)){
                                                 ?>
-                                                <option value="<?php $rkat['idPembeli'] ?>"><?php $rkat['nama_pembeli']  ?></option>
+                                                <option value="<?php echo $rkat['idPembeli'] ?>"><?php echo $rkat['nama_pembeli']  ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -126,7 +120,7 @@ $datashow = mysqli_fetch_array($data);
                                                     $dkat = mysqli_query($con,"SELECT * FROM pelayan ORDER BY nama ASC");
                                                     while ($bkat= mysqli_fetch_array($dkat)){
                                                 ?>
-                                                <option value="<?php $bkat['idPelayan'] ?>"><?php $bkat['nama']  ?></option>
+                                                <option value="<?php echo $bkat['idPelayan'] ?>"><?php echo $bkat['nama']  ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>

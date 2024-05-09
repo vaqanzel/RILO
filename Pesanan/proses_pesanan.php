@@ -3,12 +3,11 @@
 include '../koneksi.php';
 
 function generateRandomIdPesanan($length = 5) {
-    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     $idPesanan = '';
     for ($i = 0; $i < $length; $i++) {
         $idPesanan .= $characters[rand(0, strlen($characters) - 1)];
     }
-    $idPesanan = $_POST['idPesanan'];
     return $idPesanan;
 
 }
