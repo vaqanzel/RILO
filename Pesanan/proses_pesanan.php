@@ -31,8 +31,8 @@ if (isset($_POST['btnSimpanPesanan'])){
             // Mengambil harga dari database berdasarkan idMenu
             $qharga = mysqli_query($con, "SELECT harga FROM menu WHERE idMenu = '$idMenu'");
             $row = mysqli_fetch_assoc($qharga);
-            $hargaSatuan = $row['harga'] * $quantity;
-            $totalHarga += $hargaSatuan;
+            $hargaSatuan += $row['harga'] * $quantity;
+            // $totalHarga += $hargaSatuan;
 
             // Menambahkan data detail pesanan ke array
             $detailPesanan[] = "('$idPesananBaru', '$idMenu', $hargaSatuan, $quantity)";
@@ -59,5 +59,49 @@ if (isset($_POST['btnSimpanPesanan'])){
         header("location:pesanan.php");
     }
 } 
+
+if(isset($_POST['btnUpdatePesanan'])) {
+    $idPesanan = $_POST['idPesanan'];
+    $tanggalPesanan = $_POST['tanggalPesanan'];
+    $idPembeli = $_POST['idPembeli'];
+    $idPelayan = $_POST['idPelayan'];
+  
+    $qinput = mysqli_query($con, "UPDATE pesanan SET tanggalPesanan='$tanggalPesanan', idPembeli='$idPembeli', idPelayan='$idPelayan' WHERE idPesanan = $idPesanan ");
+    if ($qinput) {
+
+        $detailPesanan = array();
+        // $idPesananBaru = mysqli_insert_id($con);
+
+        // Looping untuk mengisi array detail pesanan
+        foreach ($_POST['idMenu'] as $index => $idMenu) {
+            $quantity = $_POST['quantity'][$index];
+            $idMenu = $_POST['idMenu'][$index];
+
+            // Mengambil harga dari database berdasarkan idMenu
+            $qharga = mysqli_query($con, "SELECT harga FROM menu WHERE idMenu = '$idMenu'");
+            $row = mysqli_fetch_assoc($qharga);
+            $hargaSatuan += $row['harga'] * $quantity;
+            // $totalHarga += $hargaSatuan;
+
+            $detailPesanan[] = "('$idPesananBaru', '$idMenu', $hargaSatuan, $quantity)";
+
+        }
+        
+        $values = implode(",", $detailPesanan);
+
+        $qinput_detail = mysqli_query($con, "UPDATE detailpesanan SET idMenu='$idMenu', hargaSatuan=$hargaSatuan, quantity=$quantity WHERE idPesanan=$idPesanan AND idMenu='$idMenu'");
+        if ($qinput_detail) {
+            echo '<script> window.alert("Data Berhasil Disimpan"); window.location.href=""; </script>';
+            header("location:../pembayaran/pembayaran.php?idPesanan=$idPesanan");
+        } else {
+            echo '<script> window.alert("Data Gagal Disimpan"); window.location.href=""; </script>';
+            header("location:editpesanan.php");
+        }
+    }
+    else {
+        echo '<script> window.alert("Data Gagal Disimpan"); window.location.href=""; </script>';
+        header("location:editpesanan.php");
+    }
+}
 
 ?>
