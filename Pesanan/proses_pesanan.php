@@ -44,14 +44,6 @@ if (isset($_POST['btnSimpanPesanan'])){
         // Query untuk menyimpan semua detail pesanan sekaligus
         $qinput_detail = mysqli_query($con, "INSERT INTO detailpesanan (idPesanan, idMenu, hargaSatuan, quantity) VALUES $values");
 
-        $idPembayaran = generateRandomId(10);
-        $bayar = $_POST['bayar'];
-        $kembalian = $bayar - $totalHarga;
-        $idMetodePembayaran = $_POST['idMetodePembayaran'];
-
-        $qinput_pembayaran = mysqli_query($con, "INSERT INTO pembayaran (idPembayaran, totalHarga, bayar, kembalian, idMetodePembayaran, idPesanan) VALUES ('$idPembayaran', $totalHarga, $bayar, $kembalian, '$idMetodePembayaran', $idPesananBaru)");
-
-
         // Jika penyimpanan detail pesanan berhasil, lanjutkan dengan menyimpan pesanan
         if($qinput_detail){
             // Notifikasi berhasil

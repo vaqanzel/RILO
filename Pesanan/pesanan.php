@@ -88,15 +88,6 @@ include "../koneksi.php";
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     Input Kategori Menu
                                 </button>
-                                <script>
-                                    function hitungHargaSatuan(index) {
-                                        var harga = document.getElementById('harga_'+index).value;
-                                        var quantity = document.getElementById('quantity_'+index).value;
-                                        hargaSatuan = harga * quantity;
-
-                                        document.getElementById('harga_'+index).value = hargaSatuan;
-                                    }
-                                </script>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -145,58 +136,12 @@ include "../koneksi.php";
                                                 <?php } ?>
                                             </select>
                                             <label class="form-label"></label>
-                                            <input id="quantity_<?php echo $index ?>" type="number" class="form-control mb-3" name="quantity[]" placeholder="Quantity" min="1" onchange="hitungHargaSatuan(<?php echo $index ?>)" autofocus>
+                                            <input id="quantity" type="number" class="form-control mb-3" name="quantity[]" placeholder="Quantity" min="1" onchange="hitungHargaSatuan(<?php echo $index ?>)" autofocus>
                                         </div>
-                                        <div class="input-group input-group-outline mb-3">
-                                            <label class="form-label"></label>
-                                            <input id="harga_satuan_<?php echo $index ?>" type="text" class="form-control" name="hargaSatuan" readonly>
-                                        </div>
-                                        <div class="input-group input-group-outline mb-3">
-                                            <label class="form-label"></label>
-                                            <select name="idMetodePembayaran" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" autofocus>
-                                                <option selected>Pilih Metode Pembayaran</option>
-                                                <?php 
-                                                    $dkat = mysqli_query($con,"SELECT * FROM metodepembayaran ORDER BY metodePembayaran ASC");
-                                                    while ($bkat= mysqli_fetch_array($dkat)){
-                                                ?>
-                                                <option value="<?php echo $bkat['idMetodePembayaran'] ?>"><?php echo $bkat['metodePembayaran']  ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                        <div class="input-group input-group-outline mb-3">
-                                            <label class="form-label"></label>
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="basic-addon1">Rp.</span>
-                                            </div>
-                                            <input id="bayar" type="text" class="form-control" name="bayar" placeholder="Nominal Bayar" style="width: 75px;" autofocus>
-                                        </div>
+                                        <!-- <div id="additionalDropdowns"></div>
+                                        <button type="button" id="tambahMenu" onclick="tambahDropdown()">Tambah Menu</button> -->
                                         <div class="modal-footer">
                                             <button type="submit" name="btnSimpanPesanan"  style="background-color : #AF06B8" class="btn float-end text-white me-1" ><i class="bi-save"></i>Simpan</button>
-                                            <button type="button" class="btn btn-danger float-end" data-bs-dismiss="modal"><i class="bi-x-circle"></i> Batal</button>
-                                        </div>
-                                      </form>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true" value="kategorimenu.php?idKategoriMenu=<?php echo $rec['idKategoriMenu'] ?>">
-                                  <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="updateModalLabel">Input Update Kategori Menu</h5>
-                                      </div>
-                                      <div class="modal-body">
-                                      <form role="form" action="updateKategoriProses.php" class="text-start" method="POST">
-                                        <div class="input-group input-group-outline mb-3">
-                                            <label class="form-label"></label>
-                                            <input type="text" class="form-control" name="idKategoriMenu" value="<?php echo $datashow['idKategoriMenu'];?>" autofocus>
-                                        </div>
-                                        <div class="input-group input-group-outline mb-3">
-                                            <label class="form-label"></label>
-                                            <input type="text" class="form-control" name="namaKategori" value="<?php echo $datashow['namaKategori']; ?>" autofocus>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" name="update" value="EDIT" style="background-color : #AF06B8" class="btn float-end text-white me-1" ><i class="bi-save"></i>Simpan</button>
                                             <button type="button" class="btn btn-danger float-end" data-bs-dismiss="modal"><i class="bi-x-circle"></i> Batal</button>
                                         </div>
                                       </form>
@@ -271,5 +216,6 @@ include "../koneksi.php";
         <script src="../assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="../assets/js/datatables-simple-demo.js"></script>
+        <script></script>
     </body>
 </html>

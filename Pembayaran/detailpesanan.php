@@ -1,6 +1,5 @@
 <?php
 include "../koneksi.php";
-include "../Pesanan/proses_pesanan.php";
 
 if(isset($_GET['idPesanan'])) {
     $idPesanan = $_GET['idPesanan'];
@@ -12,32 +11,10 @@ if(isset($_GET['idPesanan'])) {
     $qDtlPsn = mysqli_query($con, "SELECT * FROM detailpesanan WHERE idPesanan = '$idPesanan'");
     $recDtlPsn = mysqli_fetch_array($qDtlPsn);
     $idMenu = $recDtlPsn['idMenu'];
-    $hrgSatuan = $recDtlPsn['hargaSatuan'];
 
     $qPembayaran = mysqli_query($con, "SELECT * FROM pembayaran WHERE idPesanan = '$idPesanan'");
     $recPembayaran = mysqli_fetch_array($qPembayaran);
     $idMetodePembayaran = $recPembayaran['idMetodePembayaran'];
-
-    if(isset($_POST['btnSimpanPembayaran'])) {
-        $totalHarga += $hrgSatuan;
-        $bayar = $_POST['bayar'];
-        $kembalian = $bayar - $totalHarga;
-        $idMetodePembayaran = $_POST['idMetodePembayaran'];
-    
-        $idPembayaran = generateRandomId(10);
-
-        $qinput_pembayaran = mysqli_query($con, "INSERT INTO pembayaran (idPembayaran, totalHarga, bayar, kembalian, idMetodePembayaran, idPesanan) VALUES ('$idPembayaran', $totalHarga, $bayar, $kembalian, '$idMetodePembayaran', $idPesanan)");
-        if($qinput_pembayaran)
-        {
-            // NOTIF BERHASIL
-            echo '<script> window.alert("Data Berhasil Disimpan"); window.location.href=""; </script>';
-            header("location:../pembayaran/detailpesanan.php?idPesanan=$idPesanan");
-        } else
-        {
-            //NOTIF GAGAL
-            echo '<script> window.alert("Data Gagal Disimpan"); window.location.href=""; </script>';
-        }
-    }
 
 }
 
@@ -135,7 +112,7 @@ if(isset($_GET['idPesanan'])) {
         <div class="row justify-content-md-center">
         <div class="col col-lg-13">
 
-        <form action="pembayaran.php?idPesanan=<?php echo $idPesanan ?>" method="POST" class="portlet light bordered">
+        <form action="data.php" method="POST" class="portlet light bordered">
                 
                 <!-- <div class="input-group input-group-outline mb-3">
                   <label class="form-label"></label>
@@ -181,36 +158,44 @@ if(isset($_GET['idPesanan'])) {
                     <?php } ?>
                 </div>
                 <?php 
-                    $dkat = mysqli_query($con,"SELECT * FROM detailpesanan WHERE idPesanan = '$idPesanan'");
+                    $dkat = mysqli_query($con,"SELECT * FROM pembayaran WHERE idPesanan = '$idPesanan'");
                     while ($bkat= mysqli_fetch_array($dkat)){
                 ?>
                 <div class="input-group input-group-outline mb-3">
                   <label class="control-label col-md-3">Total Harga: </label>
-                  <p class="form-control-static">Rp. <?= $bkat['hargaSatuan'] ?></p>
+                  <p class="form-control-static">Rp. <?= $bkat['totalHarga'] ?></p>
                 </div>
                 <?php } ?>
+                <?php 
+                    $dkat = mysqli_query($con,"SELECT * FROM metodepembayaran WHERE idMetodePembayaran = '$idMetodePembayaran'");
+                    while ($bkat= mysqli_fetch_array($dkat)){
+                ?>
                 <div class="input-group input-group-outline mb-3">
-                    <label class="form-label"></label>
-                    <select name="idMetodePembayaran" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" autofocus>
-                        <option selected>Pilih Metode Pembayaran</option>
-                        <?php 
-                            $dkat = mysqli_query($con,"SELECT * FROM metodepembayaran ORDER BY metodePembayaran ASC");
-                            while ($bkat= mysqli_fetch_array($dkat)){
-                        ?>
-                        <option value="<?php echo $bkat['idMetodePembayaran'] ?>"><?php echo $bkat['metodePembayaran']  ?></option>
-                        <?php } ?>
-                    </select>
+                  <label class="control-label col-md-3">Metode Pembayaran: </label>
+                  <p class="form-control-static"><?= $bkat['metodePembayaran'] ?></p>
                 </div>
+                <?php } ?>
+                <?php 
+                    $dkat = mysqli_query($con,"SELECT * FROM pembayaran WHERE idPesanan = '$idPesanan'");
+                    while ($bkat= mysqli_fetch_array($dkat)){
+                ?>
                 <div class="input-group input-group-outline mb-3">
-                    <label class="form-label"></label>
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Rp.</span>
-                    </div>
-                    <input id="bayar" type="text" class="form-control" name="bayar" placeholder="Nominal Bayar" style="width: 75px;" autofocus>
+                  <label class="control-label col-md-3">Bayar: </label>
+                  <p class="form-control-static">Rp. <?= $bkat['bayar'] ?></p>
                 </div>
+                <?php } ?>
+                <?php 
+                    $dkat = mysqli_query($con,"SELECT * FROM pembayaran WHERE idPesanan = '$idPesanan'");
+                    while ($bkat= mysqli_fetch_array($dkat)){
+                ?>
+                <div class="input-group input-group-outline mb-3">
+                  <label class="control-label col-md-3">Kembali: </label>
+                  <p class="form-control-static">Rp. <?= $bkat['kembalian'] ?></p>
+                </div>
+                <?php } ?>
                 <input type="hidden" name="idPesanan" value="<?= $recPesanan['idPesanan'] ?>" />
 
-                <input type="submit" style="background-color : #4F06B8;" class="btn float-end text-white" name="btnSimpanPembayaran" value="Update Pembeli" >
+                <input type="submit" style="background-color : #4F06B8;" class="btn float-end text-white" name="UpPembeli" value="Update Pembeli" >
                 </form>
             </div>
         </div>
