@@ -1,6 +1,15 @@
 <?php 
 include "./koneksi.php";
 
+function generateRandomId($length = 3) {
+    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $idPesanan = '';
+    for ($i = 0; $i < $length; $i++) {
+        $idPesanan .= $characters[rand(0, strlen($characters) - 1)];
+    }
+    return $idPesanan;
+}
+
 // INPUT PEMBELI
 if (isset($_POST['btnSimpan'])){
     //DEKLARASI VARIABLE
@@ -89,12 +98,14 @@ if(isset($_GET['idMenu'])){
 
 // Input Menu
 if (isset($_POST['btnSimpanMenu'])){
+  //DEKLARASI VARIABLE
+  $idMenu = generateRandomId(3);
   $idKategoriMenu = $_POST['idKategoriMenu']; 
   $namaMenu = $_POST['namaMenu'];
   $Harga = $_POST['Harga'];
 
   // Query untuk memasukkan data menu ke database
-  $qinput = mysqli_query($con,"INSERT INTO menu (namaMenu, Harga, idKategoriMenu) VALUES ('$namaMenu', '$Harga', '$idKategoriMenu')");
+  $qinput = mysqli_query($con,"INSERT INTO menu (idMenu, namaMenu, Harga, idKategoriMenu) VALUES ('$idMenu','$namaMenu', '$Harga', '$idKategoriMenu')");
   header("location:menu.php");
   // NOTIFIKASI
   if($qinput){

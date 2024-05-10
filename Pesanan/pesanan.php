@@ -88,6 +88,15 @@ include "../koneksi.php";
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     Input Kategori Menu
                                 </button>
+                                <script>
+                                    function hitungHargaSatuan(index) {
+                                        var harga = document.getElementById('harga_'+index).value;
+                                        var quantity = document.getElementById('quantity_'+index).value;
+                                        hargaSatuan = harga * quantity;
+
+                                        document.getElementById('harga_'+index).value = hargaSatuan;
+                                    }
+                                </script>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -123,6 +132,43 @@ include "../koneksi.php";
                                                 <option value="<?php echo $bkat['idPelayan'] ?>"><?php echo $bkat['nama']  ?></option>
                                                 <?php } ?>
                                             </select>
+                                        </div>
+                                        <div class="input-group input-group-outline mb-3">
+                                            <label class="form-label"></label>
+                                            <select id="idMenu_<?php echo $index ?>" name="idMenu[]" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" onchange="hitungHargaSatuan(<?php echo $index?>)" autofocus>
+                                                <option selected>Pilih Menu</option>
+                                                <?php 
+                                                    $dkat = mysqli_query($con,"SELECT * FROM menu ORDER BY namaMenu ASC");
+                                                    while ($bkat= mysqli_fetch_array($dkat)){
+                                                ?>
+                                                <option value="<?php echo $bkat['idMenu'] ?>"><?php echo $bkat['namaMenu']  ?></option>
+                                                <?php } ?>
+                                            </select>
+                                            <label class="form-label"></label>
+                                            <input id="quantity_<?php echo $index ?>" type="number" class="form-control mb-3" name="quantity[]" placeholder="Quantity" min="1" onchange="hitungHargaSatuan(<?php echo $index ?>)" autofocus>
+                                        </div>
+                                        <div class="input-group input-group-outline mb-3">
+                                            <label class="form-label"></label>
+                                            <input id="harga_satuan_<?php echo $index ?>" type="text" class="form-control" name="hargaSatuan" readonly>
+                                        </div>
+                                        <div class="input-group input-group-outline mb-3">
+                                            <label class="form-label"></label>
+                                            <select name="idMetodePembayaran" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" autofocus>
+                                                <option selected>Pilih Metode Pembayaran</option>
+                                                <?php 
+                                                    $dkat = mysqli_query($con,"SELECT * FROM metodepembayaran ORDER BY metodePembayaran ASC");
+                                                    while ($bkat= mysqli_fetch_array($dkat)){
+                                                ?>
+                                                <option value="<?php echo $bkat['idMetodePembayaran'] ?>"><?php echo $bkat['metodePembayaran']  ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="input-group input-group-outline mb-3">
+                                            <label class="form-label"></label>
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">Rp.</span>
+                                            </div>
+                                            <input id="bayar" type="text" class="form-control" name="bayar" placeholder="Nominal Bayar" style="width: 75px;" autofocus>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" name="btnSimpanPesanan"  style="background-color : #AF06B8" class="btn float-end text-white me-1" ><i class="bi-save"></i>Simpan</button>
@@ -191,8 +237,8 @@ include "../koneksi.php";
                                             <td><?= $rec['tanggalPesanan'] ?></td>
                                             <td><?= $rec['nama_pembeli'] ?></td>
                                             <td><?= $rec['nama'] ?></td>
-                                            <td><a href="kategorimenu.php?idKategoriMenu=<?php echo $rec['idKategoriMenu']; ?>" data-bs-target="#updateModal" data-bs-toggle="modal" > Edit</a> </td>
-                                            <td><a href="data.php?idKategoriMenu=<? $rec['idKategoriMenu'] ?>"> Delete </a> </td>
+                                            <td><a href="" data-bs-target="#updateModal" data-bs-toggle="modal" > Edit</a> </td>
+                                            <td><a href=""> Delete </a> </td>
                                         </tr>
                                         <?php $no++; } ?>
                                     </tbody>
