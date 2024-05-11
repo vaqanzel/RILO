@@ -1,18 +1,14 @@
 <?php
-include "./koneksi.php";
+include "../koneksi.php";
 
-if(isset($_GET['idMetodePembayaran'])){
+
+// tampil update kategori menu
+if(isset($_GET['idKategoriMenu'])){
     //DEKLARASI VARIABEL
-    $idMetodePembayaran = $_GET['idMetodePembayaran'];
-    $delete = mysqli_query($con, "DELETE FROM metodepembayaran WHERE idMetodePembayaran = '$idMetodePembayaran' ");
-    
-    if($delete){
-        // Notifikasi berhasil
-        echo '<script> window.alert("Data Berhasil Dihapus"); window.location.href="metodepembayaran.php"; </script>';
-    } else {
-        // Notifikasi gagal
-        echo '<script> window.alert("Data Gagal Dihapus"); window.location.href="metodepembayaran.php"; </script>';
-    }
+    $idKategoriMenu = $_GET['idKategoriMenu'];
+    mysqli_query($con, "DELETE FROM kategorimenu WHERE idKategoriMenu = '$idKategoriMenu' ");
+
+    header("location:kategorimenu.php");
 
 }
 
@@ -26,15 +22,15 @@ if(isset($_GET['idMetodePembayaran'])){
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Admin Rilo Coffee</title>
-        <link rel="shortcut icon" href="./assets/img/Rilo.png" type="image/x-icon">  
+        <link rel="shortcut icon" href="../assets/img/Rilo.png" type="image/x-icon">  
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="assets/css/styles.css" rel="stylesheet" />
+        <link href="../assets/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <h6 class="navbar-brand ps-3" style="color :#AF06B8 " href="home.php"><img src="./assets/img/Rilo.png" class="img-fluid rounded-circle me-2" style="height : 35px; padding-right : 1px; padding-bottom:1px;">RILO</h6>
+            <h6 class="navbar-brand ps-3" style="color :#AF06B8 " href="../home.php"><img src="../assets/img/Rilo.png" class="img-fluid rounded-circle me-2" style="height : 35px; padding-right : 1px; padding-bottom:1px;">RILO</h6>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>            
             <!-- Navbar-->
@@ -52,76 +48,68 @@ if(isset($_GET['idMetodePembayaran'])){
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Home</div>
-                            <a class="nav-link" href="dashboard.php">
-                                <div class="sb-nav-link-icon" style="color :#AF06B8 "><i class="fas fa-tachometer-alt"></i></div>
-                                Dashboard
-                            </a>
-                            <div class="sb-sidenav-menu-heading">Input</div>
-                            <a class="nav-link" href="pembeli.php">
-                                <div class="sb-nav-link-icon"style="color :#AF06B8 "><i class="fas fa-book-open"></i></div>
-                                Input Pembeli
-                            </a>
-                            <a class="nav-link" href="pelayan.php">
-                                <div class="sb-nav-link-icon"style="color :#AF06B8 "><i class="fas fa-book-open"></i></div>
-                                Input Pelayan
-                            </a>
-                            <a class="nav-link" href="pesanan.php">
-                                <div class="sb-nav-link-icon"style="color :#AF06B8 "><i class="fas fa-book-open"></i></div>
-                                Input Pesanan
-                            </a>
-                            <a class="nav-link" href="pembayaran.php">
-                                <div class="sb-nav-link-icon"style="color :#AF06B8 "><i class="fas fa-book-open"></i></div>
-                                Input Pembayaran
-                            </a>
-                            <a class="nav-link" href="menu.php">
-                                <div class="sb-nav-link-icon"style="color :#AF06B8 "><i class="fas fa-book-open"></i></div>
-                                Input Menu
-                            </a>
-                            <a class="nav-link" href="metodePembayaran.php">
-                                <div class="sb-nav-link-icon"style="color :#AF06B8 "><i class="fas fa-book-open"></i></div>
-                                Input Metode Pembayaran
-                            </a>
-                            <a class="nav-link" href="kategoriMenu.php">
-                                <div class="sb-nav-link-icon"style="color :#AF06B8 "><i class="fas fa-book-open"></i></div>
-                                Input KategoriMenu
-                            </a>
-                            <a class="nav-link" href="detailPesanan.php">
-                                <div class="sb-nav-link-icon"style="color :#AF06B8 "><i class="fas fa-book-open"></i></div>
-                                Input Detail Pesanan
-                            </a>
-                        </nav>
+                    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                        <div class="sb-sidenav-menu">
+                          <div class="nav">
+                              <div class="sb-sidenav-menu-heading">Home</div>
+                              <a class="nav-link" href="../dashboard.php">
+                                  <div class="sb-nav-link-icon" style="color :white "><i class="fas fa-tachometer-alt"></i></div>
+                                  Dashboard
+                              </a>
+                              <div class="sb-sidenav-menu-heading">Input</div>
+                              <a class="nav-link" href="../Pembeli/pembeli.php">
+                                  <div class="sb-nav-link-icon"style="color :white "><i class="fa-solid fa-person"></i></div>
+                                  Pembeli
+                              </a>
+                              <a class="nav-link" href="../Pelayan/pelayan.php">
+                                  <div class="sb-nav-link-icon"style="color :white "><i class="fa-solid fa-user"></i></div>
+                                  Pelayan
+                              </a>
+                              <a class="nav-link" href="../Pesanan/pesanan.php">
+                                  <div class="sb-nav-link-icon"style="color :white "><i class="fa-solid fa-cart-shopping"></i></div>
+                                  Pesanan
+                              </a>
+                              <a class="nav-link" href="../Pembayaran/metodePembayaran.php">
+                                  <div class="sb-nav-link-icon"style="color :white "><i class="fa-solid fa-money-bill"></i></div>
+                                  Metode Pembayaran
+                              </a>
+                              <a class="nav-link" href="menu.php">
+                                  <div class="sb-nav-link-icon"style="color :white "><i class="fa-solid fa-mug-hot"></i></div>
+                                  Menu
+                              </a>
+                              <a class="nav-link" href="kategoriMenu.php">
+                                  <div class="sb-nav-link-icon"style="color :white "><i class="fa-solid fa-keyboard"></i></div>
+                                  KategoriMenu
+                              </a>
+                    </nav>
                     </div>
                   
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h4 class="mt-4" style="color :#AF06B8 ">Metode Pembayaran</h4>
+                                <h4 class="mt-4" style="color :#AF06B8 ">Input Kategori Menu</h4>
                                 <div class="d-flex align-items-center justify-content-between small">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    Input Metode Pembayaran
+                                    Input Kategori Menu
                                 </button>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                       <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Input Metode Pembayaran</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Input Pesanan</h5>
                                       </div>
                                       <div class="modal-body">
-                                      <form role="form" action="data.php" class="text-start" method="POST">
+                                      <form role="form" action="../data.php" class="text-start" method="POST">
                                         <div class="input-group input-group-outline mb-3">
                                             <label class="form-label"></label>
-                                            <input id="idMetodePembayaran" type="text" class="form-control" name="idMetodePembayaran" placeholder="ID Metode Pembayaran" autofocus>
+                                            <input id="idKategoriMenu" type="text" class="form-control" name="idKategoriMenu" placeholder="ID Kategori Menu" autofocus>
                                         </div>
                                         <div class="input-group input-group-outline mb-3">
                                             <label class="form-label"></label>
-                                            <input id="metodePembayaran" type="text" class="form-control" name="metodePembayaran" placeholder="Metode Pembayaran" autofocus>
+                                            <input id="namaKategori" type="text" class="form-control" name="namaKategori" placeholder="Nama Kategori" autofocus>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" name="btnSimpanMetode"  style="background-color : #AF06B8" class="btn float-end text-white me-1" ><i class="bi-save"></i>Simpan</button>
+                                            <button type="submit" name="btnSimpanKategori"  style="background-color : #AF06B8" class="btn float-end text-white me-1" ><i class="bi-save"></i>Simpan</button>
                                             <button type="button" class="btn btn-danger float-end" data-bs-dismiss="modal"><i class="bi-x-circle"></i> Batal</button>
                                         </div>
                                       </form>
@@ -135,7 +123,7 @@ if(isset($_GET['idMetodePembayaran'])){
                         <div class="card-body">
                             <div class="row justify-content-md-left">
                                 <div class="col col-lg-8">
-                                    <form role="form" action="data.php" class="text-start" method="POST">
+                                    <form role="form" action="../data.php" class="text-start" method="POST">
                         <!-- Tabel -->
                         <div class="row justify-content-md-left">
                             <div class="col col-lg-15">
@@ -143,23 +131,23 @@ if(isset($_GET['idMetodePembayaran'])){
                                     <thead>
                                         <tr>
                                             <th scope="col">NO</th>
-                                            <th scope="col">ID Metode Pembayaran</th>
-                                            <th scope="col">Nama Metode Pembayaran</th>
+                                            <th scope="col">ID Kategori Menu</th>
+                                            <th scope="col">Nama Kategori Menu</th>
                                             <th scope="col"colspan=2>Opsi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
                                             $no = 1;
-                                            $qrec = mysqli_query($con, "SELECT * FROM metodepembayaran");
+                                            $qrec = mysqli_query($con, "SELECT * FROM kategorimenu");
                                             while ($rec = mysqli_fetch_array($qrec)) {            
                                         ?>
                                         <tr>
                                             <th scope="row"><?= $no ?></th>
-                                            <td><?= $rec['idMetodePembayaran'] ?></td>
-                                            <td><?= $rec['metodePembayaran'] ?></td>
-                                            <td><a href="updatemetodepembayaran.php?idMetodePembayaran=<?= $rec['idMetodePembayaran'] ?>"> Edit</a> </td>
-                                            <td><a href="metodepembayaran.php?idMetodePembayaran=<?= $rec['idMetodePembayaran'] ?>"> Delete </a> </td>
+                                            <td><?= $rec['idKategoriMenu'] ?></td>
+                                            <td><?= $rec['namaKategori'] ?></td>
+                                            <td><a href="updatekategorimenu.php?idKategoriMenu=<?= $rec['idKategoriMenu'] ?>" > Edit</a> </td>
+                                            <td><a href="kategorimenu.php?idKategoriMenu=<?= $rec['idKategoriMenu'] ?>"> Delete </a> </td>
                                         </tr>
                                         <?php $no++; } ?>
                                     </tbody>
@@ -186,11 +174,11 @@ if(isset($_GET['idMetodePembayaran'])){
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="assets/js/scripts.js"></script>
+        <script src="../assets/js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="../assets/demo/chart-area-demo.js"></script>
+        <script src="../assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="assets/js/datatables-simple-demo.js"></script>
+        <script src="../assets/js/datatables-simple-demo.js"></script>
     </body>
 </html>

@@ -18,7 +18,7 @@ if (isset($_POST['btnSimpanPembeli'])){
 
     //QUERY PERINTAH INPUT DATA
     $qinput = mysqli_query($con,"INSERT INTO pembeli VALUES('$idPembeli','$nama_pembeli')");
-    header("location:pembeli.php");
+    header("location:./Pembeli/pembeli.php");
     //NOTIFIKASI
     if($qinput)
     {
@@ -35,7 +35,7 @@ if(isset($_GET['idPembeli'])){
   //DEKLARASI VARIABEL
   $id = $_GET['idPembeli'];
   mysqli_query($con, "DELETE FROM pembeli WHERE idPembeli = $id ");
-  header("location:pembeli.php");
+  header("location:./Pembeli/pembeli.php");
 }
 // UPDATE PEMBELI
 if(isset($_POST['UpPembeli'])){
@@ -43,7 +43,7 @@ if(isset($_POST['UpPembeli'])){
   $id = $_POST['idPembeli'];
 
  mysqli_query($con, "UPDATE pembeli SET nama_pembeli = '$recPembeli' WHERE idPembeli = $id ");
- header("location: pembeli.php");
+ header("location: ./Pembeli/pembeli.php");
 }
 
 
@@ -55,7 +55,7 @@ if(isset($_POST['btnSimpanPelayan'])) {
     $noTelp = $_POST['noTelp'];
 
     $query = mysqli_query($con, "INSERT INTO pelayan (idPelayan, nama, alamat, noTelp) VALUES ('$idPelayan', '$nama', '$alamat', '$noTelp')");
-    header("location:pelayan.php");
+    header("location:./Pelayan/pelayan.php");
     //NOTIFIKASI
     if($query)
     {
@@ -75,7 +75,7 @@ if(isset($_POST['btnUpdatePelayan'])) {
   $noTelp = $_POST['noTelp'];
 
     mysqli_query($con, "UPDATE pelayan SET nama='$nama', alamat='$alamat', noTelp='$noTelp' WHERE idPelayan = '$idPelayan' ");
-    header("location: pelayan.php");
+    header("location: ./Pelayan/pelayan.php");
 }
 
 // Delete Pelayan
@@ -83,7 +83,7 @@ if(isset($_GET['idPelayan'])) {
   //DEKLARASI VARIABEL
   $idPelayan = $_GET['idPelayan'];
   mysqli_query($con, "DELETE FROM pelayan WHERE idPelayan = '$idPelayan' ");
-  header("location:pelayan.php");
+  header("location:./Pelayan/pelayan.php");
 }
 
 // mysqli_close($con);
@@ -101,10 +101,10 @@ if (isset($_POST['btnSimpanMenu'])){
   // NOTIFIKASI
   if($qinput){
       // Notifikasi berhasil
-      echo '<script> window.alert("Data Berhasil Disimpan"); window.location.href="menu.php"; </script>';
+      echo '<script> window.alert("Data Berhasil Disimpan"); window.location.href="./Menu/menu.php"; </script>';
   } else {
       // Notifikasi gagal
-      echo '<script> window.alert("Data Gagal Disimpan"); window.location.href="menu.php"; </script>';
+      echo '<script> window.alert("Data Gagal Disimpan"); window.location.href="./Menu/menu.php"; </script>';
   }
 }
 
@@ -118,10 +118,10 @@ if(isset($_POST['btnUpdateMenu'])) {
       
       if($qupdate){
         // Notifikasi berhasil
-        echo '<script> window.alert("Data Berhasil Disimpan"); window.location.href="menu.php"; </script>';
+        echo '<script> window.alert("Data Berhasil Disimpan"); window.location.href="./Menu/menu.php"; </script>';
     } else {
         // Notifikasi gagal
-        echo '<script> window.alert("Data Gagal Disimpan"); window.location.href="menu.php"; </script>';
+        echo '<script> window.alert("Data Gagal Disimpan"); window.location.href="./Menu/menu.php"; </script>';
     }
 }
 
@@ -137,35 +137,28 @@ if (isset($_POST['btnSimpanKategori'])) {
     if($qinput)
     {
         // NOTIF BERHASIL
-        echo '<script> window.alert("Data Berhasil Disimpan"); window.location.href="kategorimenu.php"; </script>';
+        echo '<script> window.alert("Data Berhasil Disimpan"); window.location.href="./Menu/kategorimenu.php"; </script>';
     } else
     {
         //NOTIF GAGAL
-        echo '<script> window.alert("Data Gagal Disimpan"); window.location.href="kategorimenu.php"; </script>';
+        echo '<script> window.alert("Data Gagal Disimpan"); window.location.href="./Menu/kategorimenu.php"; </script>';
     }
 }
 
-// DELETE Kategori Menu
-if(isset($_GET['idKategoriMenu'])){
-    //DEKLARASI VARIABEL
-    $idKategoriMenu = $_GET['idKategoriMenu'];
-    mysqli_query($con, "DELETE FROM kategorimenu WHERE idKategoriMenu = '$idKategoriMenu' ");
-    header("location:kategorimenu.php");
-}
 // UPDATE Kategori Menu
 if(isset($_POST['UpKategoriMenu'])){
   $idKategoriMenu = $_POST['idKategoriMenu'];
   $namaKategori = $_POST['namaKategori'];
 
  mysqli_query($con, "UPDATE kategorimenu SET namaKategori = '$namaKategori' WHERE idKategoriMenu = '$idKategoriMenu' ");
- header("location: kategorimenu.php");
+ header("location: ./Menu/kategorimenu.php");
 }
 
 if(isset($_GET['idKategoriMenu'])){
     //DEKLARASI VARIABEL
     $id = $_GET['idKategoriMenu'];
     mysqli_query($con, "DELETE FROM kategorimenu WHERE idKategoriMenu = $id ");
-    header("location:kategorimenu.php");
+    header("location:./Menu/kategorimenu.php");
   }
 
 // INPUT Metode
@@ -176,7 +169,7 @@ if (isset($_POST['btnSimpanMetode'])){
 
     //QUERY PERINTAH INPUT DATA
     $qinput = mysqli_query($con,"INSERT INTO metodepembayaran VALUES('$idMetodePembayaran','$metodePembayaran')");
-    header("location:metodepembayaran.php");
+    header("location:./Pembayaran/metodepembayaran.php");
     //NOTIFIKASI
     if($qinput)
     {
@@ -197,10 +190,10 @@ if(isset($_POST['btnUpdateMetode'])) {
       
       if($qupdate){
         // Notifikasi berhasil
-        echo '<script> window.alert("Data Berhasil Disimpan"); window.location.href="metodepembayaran.php"; </script>';
+        echo '<script> window.alert("Data Berhasil Disimpan"); window.location.href="./Pembayaran/metodepembayaran.php"; </script>';
     } else {
         // Notifikasi gagal
-        echo '<script> window.alert("Data Gagal Disimpan"); window.location.href="metodepembayaran.php"; </script>';
+        echo '<script> window.alert("Data Gagal Disimpan"); window.location.href="./Pembayaran/metodepembayaran.php"; </script>';
     }
 }
 

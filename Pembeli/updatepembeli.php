@@ -1,10 +1,10 @@
 <?php
-include "./koneksi.php";
+include "../koneksi.php";
 
-if(isset($_GET['idMetodePembayaran'])) {
-    $idMetodePembayaran = $_GET['idMetodePembayaran'];
-    $qMetode = mysqli_query($con,"SELECT * FROM metodepembayaran WHERE idMetodePembayaran ='$idMetodePembayaran'");
-    $recMetode = mysqli_fetch_array($qMetode);
+if(isset($_GET['idPembeli'])) {
+   $id = $_GET['idPembeli'];
+$qPembeli = mysqli_query($con,"SELECT * FROM pembeli WHERE idPembeli ='$id'");
+$recPembeli = mysqli_fetch_array($qPembeli);
 }
 
 ?>
@@ -17,15 +17,15 @@ if(isset($_GET['idMetodePembayaran'])) {
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Admin Rilo Coffee</title>
-        <link rel="shortcut icon" href="./assets/img/Rilo.png" type="image/x-icon">  
+        <link rel="shortcut icon" href="../assets/img/Rilo.png" type="image/x-icon">  
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="assets/css/styles.css" rel="stylesheet" />
+        <link href="../assets/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <h6 class="navbar-brand ps-3" style="color :#AF06B8 " href="home.php"><img src="./assets/img/Rilo.png" class="img-fluid rounded-circle me-2" style="height : 35px; padding-right : 1px; padding-bottom:1px;">RILO</h6>
+            <h6 class="navbar-brand ps-3" style="color :#AF06B8 " href="../home.php"><img src="../assets/img/Rilo.png" class="img-fluid rounded-circle me-2" style="height : 35px; padding-right : 1px; padding-bottom:1px;">RILO</h6>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>            
             <!-- Navbar-->
@@ -43,55 +43,47 @@ if(isset($_GET['idMetodePembayaran'])) {
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Home</div>
-                            <a class="nav-link" href="dashboard.php">
-                                <div class="sb-nav-link-icon" style="color :#AF06B8 "><i class="fas fa-tachometer-alt"></i></div>
+                            <a class="nav-link" href="../dashboard.php">
+                                <div class="sb-nav-link-icon" style="color :white "><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
                             <div class="sb-sidenav-menu-heading">Input</div>
                             <a class="nav-link" href="pembeli.php">
-                                <div class="sb-nav-link-icon"style="color :#AF06B8 "><i class="fas fa-book-open"></i></div>
-                                Input Pembeli
+                                <div class="sb-nav-link-icon"style="color :white "><i class="fa-solid fa-person"></i></div>
+                                Pembeli
                             </a>
-                            <a class="nav-link" href="pelayan.php">
-                                <div class="sb-nav-link-icon"style="color :#AF06B8 "><i class="fas fa-book-open"></i></div>
-                                Input Pelayan
+                            <a class="nav-link" href="../Pelayan/pelayan.php">
+                                <div class="sb-nav-link-icon"style="color :white "><i class="fa-solid fa-user"></i></div>
+                                Pelayan
                             </a>
-                            <a class="nav-link" href="pesanan.php">
-                                <div class="sb-nav-link-icon"style="color :#AF06B8 "><i class="fas fa-book-open"></i></div>
-                                Input Pesanan
+                            <a class="nav-link" href="../Pesanan/pesanan.php">
+                                <div class="sb-nav-link-icon"style="color :white "><i class="fa-solid fa-cart-shopping"></i></div>
+                                Pesanan
                             </a>
-                            <a class="nav-link" href="pembayaran.php">
-                                <div class="sb-nav-link-icon"style="color :#AF06B8 "><i class="fas fa-book-open"></i></div>
-                                Input Pembayaran
+                            <a class="nav-link" href="../Pembayaran/metodePembayaran.php">
+                                <div class="sb-nav-link-icon"style="color :white "><i class="fa-solid fa-money-bill"></i></div>
+                                Metode Pembayaran
                             </a>
-                            <a class="nav-link" href="menu.php">
-                                <div class="sb-nav-link-icon"style="color :#AF06B8 "><i class="fas fa-book-open"></i></div>
-                                Input Menu
+                            <a class="nav-link" href="../Menu/menu.php">
+                                <div class="sb-nav-link-icon"style="color :white "><i class="fa-solid fa-mug-hot"></i></div>
+                                Menu
                             </a>
-                            <a class="nav-link" href="metodePembayaran.php">
-                                <div class="sb-nav-link-icon"style="color :#AF06B8 "><i class="fas fa-book-open"></i></div>
-                                Input Metode Pembayaran
-                            </a>
-                            <a class="nav-link" href="kategoriMenu.php">
-                                <div class="sb-nav-link-icon"style="color :#AF06B8 "><i class="fas fa-book-open"></i></div>
-                                Input KategoriMenu
-                            </a>
-                            <a class="nav-link" href="detailPesanan.php">
-                                <div class="sb-nav-link-icon"style="color :#AF06B8 "><i class="fas fa-book-open"></i></div>
-                                Input Detail Pesanan
+                            <a class="nav-link" href="../Menu/kategoriMenu.php">
+                                <div class="sb-nav-link-icon"style="color :white "><i class="fa-solid fa-keyboard"></i></div>
+                                KategoriMenu
                             </a>
                       </nav>
                   </div>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                      <h4 class="mt-4" style="color : #4F06B8;">Update Metode Pembayaran</h4>
+                      <h4 class="mt-4" style="color : #4F06B8;">Update Pembeli</h4>
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted mb-4">Update metode Pembayaran</div>
+                            <div class="text-muted mb-4">Update Pembeli</div>
                         </div>
                         
         <!-- Page Wrapper -->
@@ -101,14 +93,15 @@ if(isset($_GET['idMetodePembayaran'])) {
         <div class="row justify-content-md-center">
         <div class="col col-lg-13">
 
-        <form action="data.php" method="POST" >
+        <form action="../data.php" method="POST" >
+                
                 <div class="input-group input-group-outline mb-3">
                   <label class="form-label"></label>
-                  <input type="text" name="metodePembayaran" id="" class="form-control" placeholder="" value="<?= $recMetode['metodePembayaran'] ?>">
+                  <input type="text" name="nama_pembeli" id="" class="form-control" placeholder="" value="<?= $recPembeli['nama_pembeli'] ?>">
                 </div>
-                <input type="hidden" name="idMetodePembayaran" value="<?= $recMetode['idMetodePembayaran'] ?>" />
+                <input type="hidden" name="idPembeli" value="<?= $recPembeli['idPembeli'] ?>" />
 
-                <input type="submit" style="background-color : #4F06B8;" class="btn float-end text-white" name="btnUpdateMetode" value="Update Metode Pembayaran" >
+                <input type="submit" style="background-color : #4F06B8;" class="btn float-end text-white" name="UpPembeli" value="Update Pembeli" >
                 </form>
             </div>
         </div>
@@ -181,7 +174,7 @@ if(isset($_GET['idMetodePembayaran'])) {
 
    <!-- script -->
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<script src="js/scripts.js"></script>
+<script src="../assets/js/scripts.js"></script>
 <!-- end script -->
 </body>
 
