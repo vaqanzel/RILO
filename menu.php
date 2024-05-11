@@ -1,10 +1,19 @@
 <?php
 include "./koneksi.php";
 
-// Menghapus Menu
 if(isset($_GET['idMenu'])){
-    $id = $_GET['idMenu'];
-    mysqli_query($con, "DELETE FROM menu WHERE idMenu = $id");
+    //DEKLARASI VARIABEL
+    $idPesanan = $_GET['idMenu'];
+    $delete = mysqli_query($con, "DELETE FROM menu WHERE idMenu = '$idMenu' ");
+    
+    if($delete){
+        // Notifikasi berhasil
+        echo '<script> window.alert("Data Berhasil Dihapus"); window.location.href="menu.php"; </script>';
+    } else {
+        // Notifikasi gagal
+        echo '<script> window.alert("Data Gagal Dihapus"); window.location.href="menu.php"; </script>';
+    }
+
 }
 
 ?>
@@ -89,46 +98,57 @@ if(isset($_GET['idMenu'])){
                   
                   <div id="layoutSidenav_content">
                     <main>
-                    <div class="container-fluid px-4">
-                      <h4 class="mt-4" style="color :#AF06B8 ">Input Menu</h4>
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted mb-4">Input Menu</div>
-                        </div></main>
+                    <h4 class="mt-4" style="color :#AF06B8 ">Tabel Menu</h4>
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Input Menu
+                        </button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Input Menu</h5>
+                              </div>
+                              <div class="modal-body">
+                              <form role="form" action="data.php" class="text-start" method="POST">
+                                <div class="input-group input-group-outline mb-3">
+                                    <label class="form-label"></label>
+                                    <input id="idMenu" type="text" class="form-control" name="namaMenu" placeholder="Nama Menu" autofocus>
+                                </div>
+                                <div class="input-group input-group-outline mb-3">
+                                    <label class="form-label"></label>
+                                    <span class="input-group-text" id="basic-addon1">Rp.</span>
+                                    <input id="idMenu" type="text" class="form-control" name="Harga" placeholder="Harga Menu" autofocus>
+                                </div>
+                                <div class="input-group input-group-outline mb-3">
+                                <select name="idKategoriMenu" class="custom-select">
+                                    <option selected>Pilih Kategori Menu</option>
+                                    <?php
+                                    $qkat = mysqli_query($con,"SELECT * FROM kategorimenu ORDER BY namaKategori ASC");
+                                    while ($rkat= mysqli_fetch_array($qkat)){
+                                    ?>
+                                    <option value="<?= $rkat['idKategoriMenu'] ?>" ><?= $rkat['namaKategori'] ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" name="btnSimpanMenu"  style="background-color : #AF06B8" class="btn float-end text-white me-1" ><i class="bi-save"></i>Simpan</button>
+                                    <button type="button" class="btn btn-danger float-end" data-bs-dismiss="modal"><i class="bi-x-circle"></i> Batal</button>
+                                </div>
+                              </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    </main>
                           <!-- Form Input -->
                     <div class="card-body">
                     <div class="row justify-content-md-left">
                      <div class="col col-lg-8">
               <form role="form" action="data.php" class="text-start" method="POST">
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label"></label>
-                  <input id="idMenu" type="text" class="form-control" name="namaMenu" placeholder="Nama Menu" autofocus>
-                </div>
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label"></label>
-                  <input id="idMenu" type="text" class="form-control" name="Harga" placeholder="Harga" autofocus>
-                </div>
-                <div class="input-group input-group-outline mb-3">
-                    <select name="idKategoriMenu" class="custom-select">
-                        <option selected>Pilih Kategori Menu</option>
-                        <?php
-                        $qkat = mysqli_query($con,"SELECT * FROM kategorimenu ORDER BY namaKategori ASC");
-                        while ($rkat= mysqli_fetch_array($qkat)){
-                        ?>
-
-                        <option value="<?= $rkat['idKategoriMenu'] ?>" ><?= $rkat['namaKategori'] ?></option>
-
-                        <?php
-                        }
-                        ?>
-                    </select>
-                </div>
-                
-                <div class="footer mb-5">
-                    <button type="reset" class="btn btn-danger float-end"><i class="bi-x-circle"></i>
-                        Batal</button>
-                    <button type="submit" name="btnSimpanMenu"  style="background-color : #AF06B8" class="btn float-end text-white me-1" ><i class="bi-save"></i>
-                        Simpan</button>
-                </div>
 
                     <!-- Tabel -->
             <div class="row justify-content-md-left">
@@ -156,8 +176,8 @@ if(isset($_GET['idMenu'])){
                 <td><?= $rec['namaMenu'] ?></td>
                 <td><?= $rec['Harga'] ?></td>
                 <td><?= $rec['namaKategori'] ?></td>
-                <td><a href="updatemenu.php?idMenu=<?= $rec[0] ?>"> Edit</a> </td>
-                <td><a href="data.php?idMenu=<?= $rec['idMenu'] ?>"> Delete </a> </td>
+                <td><a href="updatemenu.php?idMenu=<?= $rec['idMenu'] ?>"> Edit</a> </td>
+                <td><a href="menu.php?idMenu=<?= $rec['idMenu'] ?>"> Delete </a> </td>
             </tr>
             <?php $no++; } ?>
         </tbody>

@@ -91,10 +91,10 @@ if(isset($_GET['idPesanan'])){
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h4 class="mt-4" style="color :#AF06B8 ">Input Menu</h4>
+                                <h4 class="mt-4" style="color :#AF06B8 ">Tabel Pesanan</h4>
                                 <div class="d-flex align-items-center justify-content-between small">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    Input Kategori Menu
+                                    Input Pesanan
                                 </button>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                   <div class="modal-dialog" role="document">

@@ -123,9 +123,9 @@ if(isset($_GET['idPesanan'])) {
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                      <h4 class="mt-4" style="color : #4F06B8;">Detail Pesanan</h4>
+                      <h4 class="mt-4" style="color : #4F06B8;">Pembayaran</h4>
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted mb-4">Struk Digital</div>
+                            <div class="text-muted mb-4">Metode Pembayaran</div>
                         </div>
                         
         <!-- Page Wrapper -->
@@ -136,11 +136,6 @@ if(isset($_GET['idPesanan'])) {
         <div class="col col-lg-13">
 
         <form action="pembayaran.php?idPesanan=<?php echo $idPesanan ?>" method="POST" class="portlet light bordered">
-                
-                <!-- <div class="input-group input-group-outline mb-3">
-                  <label class="form-label"></label>
-                  <input type="text" name="idPembeli" id="" class="form-control" placeholder="" value="<?= $recPembeli['idPembeli'] ?>">
-              </div>    -->
                 <div class="input-group input-group-outline mb-3">
                   <label class="control-label col-md-3">Tanggal Pesanan: </label>
                   <p class="form-control-static"><?= $recPesanan['tanggalPesanan'] ?></p>
@@ -209,12 +204,13 @@ if(isset($_GET['idPesanan'])) {
                     <input id="bayar" type="text" class="form-control" name="bayar" placeholder="Nominal Bayar" style="width: 75px;" autofocus>
                 </div>
                 <input type="hidden" name="idPesanan" value="<?= $recPesanan['idPesanan'] ?>" />
-
-                <input type="submit" style="background-color : #4F06B8;" class="btn float-end text-white" name="btnSimpanPembayaran" value="Update Pembeli" >
-                </form>
-                <form action="../Pesanan/editpesanan.php?idPesanan=<?= $recPesanan['idPesanan'] ?>" method="POST">
-                <input type="submit" style="background-color : #4F06B8;" class="btn float-end text-white" action="" value="Edit Pesanan" >
-                </form>
+                <div class="input-group input-group-outline mb-3">
+                    <input type="submit" style="background-color : #4F06B8;" class="btn btn-info text-white" name="btnSimpanPembayaran" value="Submit" >
+                    <p>&emsp;</p>
+                    <a href="../Pesanan/pesanan.php?idPesanan=<?= $recPesanan['idPesanan'] ?>" class="btn btn-danger text-white">Batalkan Pesanan</a>
+                    <p>&emsp;</p>
+                    <a href="../Pesanan/editpesanan.php?idPesanan=<?= $recPesanan['idPesanan'] ?>" class="btn btn-warning">Edit Pesanan</a>
+                </div>
             </div>
         </div>
     </div>

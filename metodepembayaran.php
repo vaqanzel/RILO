@@ -1,10 +1,20 @@
 <?php
 include "./koneksi.php";
 
+if(isset($_GET['idMetodePembayaran'])){
+    //DEKLARASI VARIABEL
+    $idMetodePembayaran = $_GET['idMetodePembayaran'];
+    $delete = mysqli_query($con, "DELETE FROM metodepembayaran WHERE idMetodePembayaran = '$idMetodePembayaran' ");
+    
+    if($delete){
+        // Notifikasi berhasil
+        echo '<script> window.alert("Data Berhasil Dihapus"); window.location.href="metodepembayaran.php"; </script>';
+    } else {
+        // Notifikasi gagal
+        echo '<script> window.alert("Data Gagal Dihapus"); window.location.href="metodepembayaran.php"; </script>';
+    }
 
-// tampil update kategori menu
-$data = mysqli_query($con, "SELECT * FROM metodepembayaran WHERE idMetodePembayaran='$_GET[idMetodePembayaran]'");
-$datashow = mysqli_fetch_array($data);
+}
 
 ?>
 <!DOCTYPE html>
@@ -119,31 +129,6 @@ $datashow = mysqli_fetch_array($data);
                                     </div>
                                   </div>
                                 </div>
-                                <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
-                                  <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="updateModalLabel">Input Update Kategori Menu</h5>
-                                      </div>
-                                      <div class="modal-body">
-                                      <form role="form" action="updateKategoriProses.php" class="text-start" method="POST">
-                                        <div class="input-group input-group-outline mb-3">
-                                            <label class="form-label"></label>
-                                            <input type="text" class="form-control" name="idKategoriMenu" value="<?php echo $datashow['idKategoriMenu'];?>" autofocus>
-                                        </div>
-                                        <div class="input-group input-group-outline mb-3">
-                                            <label class="form-label"></label>
-                                            <input type="text" class="form-control" name="namaKategori" value="<?php echo $datashow['namaKategori']; ?>" autofocus>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" name="update" value="EDIT" style="background-color : #AF06B8" class="btn float-end text-white me-1" ><i class="bi-save"></i>Simpan</button>
-                                            <button type="button" class="btn btn-danger float-end" data-bs-dismiss="modal"><i class="bi-x-circle"></i> Batal</button>
-                                        </div>
-                                      </form>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
                             </div>
                         </main>
                           <!-- Form Input -->
@@ -173,8 +158,8 @@ $datashow = mysqli_fetch_array($data);
                                             <th scope="row"><?= $no ?></th>
                                             <td><?= $rec['idMetodePembayaran'] ?></td>
                                             <td><?= $rec['metodePembayaran'] ?></td>
-                                            <td><a href="kategorimenu.php?idKategoriMenu=<?php echo $rec['idKategoriMenu']; ?>" data-bs-target="#updateModal" data-bs-toggle="modal" value="<? echo $rec['idKategoriMenu']; ?>" > Edit</a> </td>
-                                            <td><a href="data.php?idKategoriMenu=<?= $rec['idKategoriMenu'] ?>"> Delete </a> </td>
+                                            <td><a href="updatemetodepembayaran.php?idMetodePembayaran=<?= $rec['idMetodePembayaran'] ?>"> Edit</a> </td>
+                                            <td><a href="metodepembayaran.php?idMetodePembayaran=<?= $rec['idMetodePembayaran'] ?>"> Delete </a> </td>
                                         </tr>
                                         <?php $no++; } ?>
                                     </tbody>
