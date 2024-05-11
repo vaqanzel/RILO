@@ -6,13 +6,7 @@ if(isset($_GET['idMetodePembayaran'])){
     $idMetodePembayaran = $_GET['idMetodePembayaran'];
     $delete = mysqli_query($con, "DELETE FROM metodepembayaran WHERE idMetodePembayaran = '$idMetodePembayaran' ");
     
-    if($delete){
-        // Notifikasi berhasil
-        echo '<script> window.alert("Data Berhasil Dihapus"); window.location.href="metodepembayaran.php"; </script>';
-    } else {
-        // Notifikasi gagal
-        echo '<script> window.alert("Data Gagal Dihapus"); window.location.href="metodepembayaran.php"; </script>';
-    }
+    header("location:metodepembayaran.php");
 
 }
 
@@ -103,7 +97,7 @@ if(isset($_GET['idMetodePembayaran'])){
                                         <h5 class="modal-title" id="exampleModalLabel">Input Metode Pembayaran</h5>
                                       </div>
                                       <div class="modal-body">
-                                      <form role="form" action="data.php" class="text-start" method="POST">
+                                      <form role="form" action="../data.php" class="text-start" method="POST">
                                         <div class="input-group input-group-outline mb-3">
                                             <label class="form-label"></label>
                                             <input id="idMetodePembayaran" type="text" class="form-control" name="idMetodePembayaran" placeholder="ID Metode Pembayaran" autofocus>
