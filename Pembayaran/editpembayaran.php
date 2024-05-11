@@ -19,19 +19,19 @@ if(isset($_GET['idPesanan'])) {
     $idMetodePembayaran = $recPembayaran['idMetodePembayaran'];
 
     if(isset($_POST['btnUpdatePembayaran'])) {
-        $idPsn = $idPesanan;
-        $totalHarga = $hrgSatuan;
+        $totalHarga += $hrgSatuan;
         $bayar = $_POST['bayar'];
         $kembalian = $bayar - $totalHarga;
         $idMetodePembayaran = $_POST['idMetodePembayaran'];
 
-        $qinput_pembayaran = mysqli_query($con, "UPDATE pembayaran SET totalHarga=$totalHarga, bayar=$bayar, kembalian=$kembalian, idMetodePembayaran='$idMetodePembayaran' WHERE idPesanan = $idPsn ");
+        $idPembayaran = $recPembayaran['idPembayaran'];
+
+        $qinput_pembayaran = mysqli_query($con, "UPDATE pembayaran SET totalHarga=$totalHarga, bayar=$bayar, kembalian=$kembalian, idMetodePembayaran='$idMetodePembayaran' WHERE idPesanan = '$idPesanan' ");
         if($qinput_pembayaran)
         {
             // NOTIF BERHASIL
             echo '<script> window.alert("Data Berhasil Disimpan"); window.location.href=""; </script>';
             header("location:../pembayaran/detailpesanan.php?idPesanan=$idPesanan");
-            exit;
         } else
         {
             //NOTIF GAGAL
@@ -135,7 +135,7 @@ if(isset($_GET['idPesanan'])) {
         <div class="row justify-content-md-center">
         <div class="col col-lg-13">
 
-        <form action="pembayaran.php?idPesanan=<?php echo $idPesanan ?>" method="POST" class="portlet light bordered">
+        <form action="editpembayaran.php?idPesanan=<?php echo $idPesanan ?>" method="POST" class="portlet light bordered">
                 <div class="input-group input-group-outline mb-3">
                   <label class="control-label col-md-3">Tanggal Pesanan: </label>
                   <p class="form-control-static"><?= $recPesanan['tanggalPesanan'] ?></p>

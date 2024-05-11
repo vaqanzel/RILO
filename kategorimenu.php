@@ -119,31 +119,6 @@ $datashow = mysqli_fetch_array($data);
                                     </div>
                                   </div>
                                 </div>
-                                <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true" value="kategorimenu.php?idKategoriMenu=<?php echo $rec['idKategoriMenu'] ?>">
-                                  <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="updateModalLabel">Input Update Kategori Menu</h5>
-                                      </div>
-                                      <div class="modal-body">
-                                      <form role="form" action="updateKategoriProses.php" class="text-start" method="POST">
-                                        <div class="input-group input-group-outline mb-3">
-                                            <label class="form-label"></label>
-                                            <input type="text" class="form-control" name="idKategoriMenu" value="<?php echo $datashow['idKategoriMenu'];?>" autofocus>
-                                        </div>
-                                        <div class="input-group input-group-outline mb-3">
-                                            <label class="form-label"></label>
-                                            <input type="text" class="form-control" name="namaKategori" value="<?php echo $datashow['namaKategori']; ?>" autofocus>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" name="update" value="EDIT" style="background-color : #AF06B8" class="btn float-end text-white me-1" ><i class="bi-save"></i>Simpan</button>
-                                            <button type="button" class="btn btn-danger float-end" data-bs-dismiss="modal"><i class="bi-x-circle"></i> Batal</button>
-                                        </div>
-                                      </form>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
                             </div>
                         </main>
                           <!-- Form Input -->
@@ -173,7 +148,7 @@ $datashow = mysqli_fetch_array($data);
                                             <th scope="row"><?= $no ?></th>
                                             <td><?= $rec['idKategoriMenu'] ?></td>
                                             <td><?= $rec['namaKategori'] ?></td>
-                                            <td><a href="kategorimenu.php?idKategoriMenu=<?php echo $rec['idKategoriMenu']; ?>" data-bs-target="#updateModal" data-bs-toggle="modal" > Edit</a> </td>
+                                            <td><a href="updatekategorimenu.php?idKategoriMenu=<?= $rec['idKategoriMenu'] ?>" > Edit</a> </td>
                                             <td><a href="data.php?idKategoriMenu=<? $rec['idKategoriMenu'] ?>"> Delete </a> </td>
                                         </tr>
                                         <?php $no++; } ?>

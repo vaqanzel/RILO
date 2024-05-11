@@ -83,27 +83,64 @@ include "./koneksi.php";
                   
                   <div id="layoutSidenav_content">
                     <main>
-                    <div class="container-fluid px-4">
-                      <h4 class="mt-4" style="color :#AF06B8 ">Input Pembeli</h4>
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted mb-4">Input Pembeli</div>
-                        </div></main>
+                    <h4 class="mt-4" style="color :#AF06B8 ">Tabel Pembeli</h4>
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Input Pembeli
+                        </button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Input Pembeli</h5>
+                              </div>
+                              <div class="modal-body">
+                              <form role="form" action="data.php" class="text-start" method="POST">
+                                <div class="input-group input-group-outline mb-3">
+                                    <label class="form-label"></label>
+                                    <input id="idPembeli" type="text" class="form-control" name="nama_pembeli" placeholder="Nama Pembeli" autofocus>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" name="btnSimpanPembeli"  style="background-color : #AF06B8" class="btn float-end text-white me-1" ><i class="bi-save"></i>Simpan</button>
+                                    <button type="button" class="btn btn-danger float-end" data-bs-dismiss="modal"><i class="bi-x-circle"></i> Batal</button>
+                                </div>
+                              </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true" value="kategorimenu.php?idKategoriMenu=<?php echo $rec['idKategoriMenu'] ?>">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="updateModalLabel">Input Update Kategori Menu</h5>
+                              </div>
+                              <div class="modal-body">
+                              <form role="form" action="updateKategoriProses.php" class="text-start" method="POST">
+                                <div class="input-group input-group-outline mb-3">
+                                    <label class="form-label"></label>
+                                    <input type="text" class="form-control" name="idKategoriMenu" value="<?php echo $datashow['idKategoriMenu'];?>" autofocus>
+                                </div>
+                                <div class="input-group input-group-outline mb-3">
+                                    <label class="form-label"></label>
+                                    <input type="text" class="form-control" name="namaKategori" value="<?php echo $datashow['namaKategori']; ?>" autofocus>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" name="update" value="EDIT" style="background-color : #AF06B8" class="btn float-end text-white me-1" ><i class="bi-save"></i>Simpan</button>
+                                    <button type="button" class="btn btn-danger float-end" data-bs-dismiss="modal"><i class="bi-x-circle"></i> Batal</button>
+                                </div>
+                              </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    </main>
                           <!-- Form Input -->
                           <div class="card-body">
                     <div class="row justify-content-md-left">
                      <div class="col col-lg-8">
               <form role="form" action="data.php" class="text-start" method="POST">
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label"></label>
-                  <input id="idPembeli" type="text" class="form-control" name="nama_pembeli" placeholder="Nama Pembeli" autofocus>
-                </div>
-                
-                <div class="footer mb-5">
-                    <button type="reset" class="btn btn-danger float-end"><i class="bi-x-circle"></i>
-                        Batal</button>
-                    <button type="submit" name="btnSimpan"  style="background-color : #AF06B8" class="btn float-end text-white me-1" ><i class="bi-save"></i>
-                        Simpan</button>
-                </div>
 
                     <!-- Tabel -->
             <div class="row justify-content-md-left">

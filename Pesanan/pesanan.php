@@ -1,5 +1,13 @@
 <?php
 include "../koneksi.php";
+
+if(isset($_GET['idPesanan'])){
+    //DEKLARASI VARIABEL
+    $idPesanan = $_GET['idPesanan'];
+    mysqli_query($con, "DELETE FROM pembayaran WHERE idPesanan = '$idPesanan' ");
+    mysqli_query($con, "DELETE FROM pesanan WHERE idPesanan = '$idPesanan' ");
+    header("location:pesanan.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -182,8 +190,9 @@ include "../koneksi.php";
                                             <td><?= $rec['tanggalPesanan'] ?></td>
                                             <td><?= $rec['nama_pembeli'] ?></td>
                                             <td><?= $rec['nama'] ?></td>
-                                            <td><a href="" data-bs-target="#updateModal" data-bs-toggle="modal" > Edit</a> </td>
-                                            <td><a href=""> Delete </a> </td>
+                                            <td><a href="../Pembayaran/detailpesanan.php?idPesanan=<?= $rec['idPesanan']?>">Detail</a> </td>
+                                            <td><a href="editgeneralpesanan.php?idPesanan=<?= $rec['idPesanan']?>">Edit</a> </td>
+                                            <td><a href="pesanan.php?idPesanan=<?= $rec['idPesanan']?>">Delete </a> </td>
                                         </tr>
                                         <?php $no++; } ?>
                                     </tbody>

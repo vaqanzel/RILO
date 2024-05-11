@@ -81,38 +81,75 @@
                   <div id="layoutSidenav_content">
                     <main>
                     <div class="container-fluid px-4">
-                      <h4 class="mt-4" style="color :#AF06B8 ">Input Pelayan</h4>
+                        <h4 class="mt-4" style="color :#AF06B8 ">Input Pelayan</h4>
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted mb-4">Input Pelayan</div>
-                        </div></main>
-                          <!-- Form Input -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Input Pelayan
+                        </button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Input Pesanan</h5>
+                              </div>
+                              <div class="modal-body">
+                              <form role="form" action="data.php" class="text-start" method="POST">
+                                <div class="input-group input-group-outline mb-3">
+                                    <label class="form-label"></label>
+                                    <input id="idPelayan" type="text" class="form-control" name="idPelayan" placeholder="ID Pelayan" autofocus>
+                                </div>
+                                <div class="input-group input-group-outline mb-3">
+                                    <label class="form-label"></label>
+                                    <input id="nama" type="text" class="form-control" name="nama" placeholder="Nama Pelayan" autofocus>
+                                </div>
+                                <div class="input-group input-group-outline mb-3">
+                                    <label class="form-label"></label>
+                                    <input id="alamat" type="text" class="form-control" name="alamat" placeholder="Alamat" autofocus>
+                                </div>
+                                <div class="input-group input-group-outline mb-3">
+                                    <label class="form-label"></label>
+                                    <input id="noTelp" type="text" class="form-control" name="noTelp" placeholder="No Telepon" autofocus>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" name="btnSimpanPelayan"  style="background-color : #AF06B8" class="btn float-end text-white me-1" ><i class="bi-save"></i>Simpan</button>
+                                    <button type="button" class="btn btn-danger float-end" data-bs-dismiss="modal"><i class="bi-x-circle"></i> Batal</button>
+                                </div>
+                              </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true" value="kategorimenu.php?idKategoriMenu=<?php echo $rec['idKategoriMenu'] ?>">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="updateModalLabel">Input Update Kategori Menu</h5>
+                              </div>
+                              <div class="modal-body">
+                              <form role="form" action="updateKategoriProses.php" class="text-start" method="POST">
+                                <div class="input-group input-group-outline mb-3">
+                                    <label class="form-label"></label>
+                                    <input type="text" class="form-control" name="idKategoriMenu" value="<?php echo $datashow['idKategoriMenu'];?>" autofocus>
+                                </div>
+                                <div class="input-group input-group-outline mb-3">
+                                    <label class="form-label"></label>
+                                    <input type="text" class="form-control" name="namaKategori" value="<?php echo $datashow['namaKategori']; ?>" autofocus>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" name="update" value="EDIT" style="background-color : #AF06B8" class="btn float-end text-white me-1" ><i class="bi-save"></i>Simpan</button>
+                                    <button type="button" class="btn btn-danger float-end" data-bs-dismiss="modal"><i class="bi-x-circle"></i> Batal</button>
+                                </div>
+                              </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    </main>
                     <div class="card-body">
                     <div class="row justify-content-md-left">
                      <div class="col col-lg-8">
               <form role="form" action="data.php" class="text-start" method="POST">
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label"></label>
-                  <input id="idPelayan" type="text" class="form-control" name="idPelayan" placeholder="ID Pelayan" autofocus>
-                </div>
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label"></label>
-                  <input id="nama" type="text" class="form-control" name="nama" placeholder="Nama Pelayan" autofocus>
-                </div>
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label"></label>
-                  <input id="alamat" type="text" class="form-control" name="alamat" placeholder="Alamat" autofocus>
-                </div>
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label"></label>
-                  <input id="noTelp" type="text" class="form-control" name="noTelp" placeholder="No Telp" autofocus>
-                </div>
-                
-                <div class="footer mb-5">
-                    <button type="reset" class="btn btn-danger float-end"><i class="bi-x-circle"></i>
-                        Batal</button>
-                    <button type="submit" name="btnSimpanPelayan"  style="background-color : #AF06B8" class="btn float-end text-white me-1" ><i class="bi-save"></i>
-                        Simpan</button>
-                </div>
 
                     <!-- Tabel -->
             <div class="row justify-content-md-left">

@@ -11,7 +11,7 @@ function generateRandomId($length = 3) {
 }
 
 // INPUT PEMBELI
-if (isset($_POST['btnSimpan'])){
+if (isset($_POST['btnSimpanPembeli'])){
     //DEKLARASI VARIABLE
     // $idPembeli = $_POST['idPembeli'];
     $nama_pembeli = $_POST['nama_pembeli'];
@@ -146,7 +146,7 @@ if(isset($_GET['idKategoriMenu'])){
     header("location:kategorimenu.php");
 }
 // UPDATE Kategori Menu
-if(isset($_POST['UpKategori'])){
+if(isset($_POST['UpKategoriMenu'])){
   $idKategoriMenu = $_POST['idKategoriMenu'];
   $namaKategori = $_POST['namaKategori'];
 

@@ -1,44 +1,10 @@
 <?php
-include "../koneksi.php";
-include "../Pesanan/proses_pesanan.php";
+include "./koneksi.php";
 
-if(isset($_GET['idPesanan'])) {
-    $idPesanan = $_GET['idPesanan'];
-    $qPesanan = mysqli_query($con,"SELECT * FROM pesanan WHERE idPesanan ='$idPesanan'");
-    $recPesanan = mysqli_fetch_array($qPesanan);
-    $idPembeli = $recPesanan['idPembeli'];
-    $idPelayan = $recPesanan['idPelayan'];
-
-    $qDtlPsn = mysqli_query($con, "SELECT * FROM detailpesanan WHERE idPesanan = '$idPesanan'");
-    $recDtlPsn = mysqli_fetch_array($qDtlPsn);
-    $idMenu = $recDtlPsn['idMenu'];
-    $hrgSatuan = $recDtlPsn['hargaSatuan'];
-
-    $qPembayaran = mysqli_query($con, "SELECT * FROM pembayaran WHERE idPesanan = '$idPesanan'");
-    $recPembayaran = mysqli_fetch_array($qPembayaran);
-    $idMetodePembayaran = $recPembayaran['idMetodePembayaran'];
-
-    if(isset($_POST['btnSimpanPembayaran'])) {
-        $totalHarga += $hrgSatuan;
-        $bayar = $_POST['bayar'];
-        $kembalian = $bayar - $totalHarga;
-        $idMetodePembayaran = $_POST['idMetodePembayaran'];
-    
-        $idPembayaran = generateRandomId(10);
-
-        $qinput_pembayaran = mysqli_query($con, "INSERT INTO pembayaran (idPembayaran, totalHarga, bayar, kembalian, idMetodePembayaran, idPesanan) VALUES ('$idPembayaran', $totalHarga, $bayar, $kembalian, '$idMetodePembayaran', $idPesanan)");
-        if($qinput_pembayaran)
-        {
-            // NOTIF BERHASIL
-            echo '<script> window.alert("Data Berhasil Disimpan"); window.location.href=""; </script>';
-            header("location:../pembayaran/detailpesanan.php?idPesanan=$idPesanan");
-        } else
-        {
-            //NOTIF GAGAL
-            echo '<script> window.alert("Data Gagal Disimpan"); window.location.href=""; </script>';
-        }
-    }
-
+if(isset($_GET['idKategoriMenu'])) {
+   $idKategoriMenu = $_GET['idKategoriMenu'];
+$qKategoriMenu = mysqli_query($con,"SELECT * FROM kategorimenu WHERE idKategoriMenu ='$idKategoriMenu'");
+$recKategoriMenu = mysqli_fetch_array($qKategoriMenu);
 }
 
 ?>
@@ -51,15 +17,15 @@ if(isset($_GET['idPesanan'])) {
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Admin Rilo Coffee</title>
-        <link rel="shortcut icon" href="../assets/img/Rilo.png" type="image/x-icon">  
+        <link rel="shortcut icon" href="./assets/img/Rilo.png" type="image/x-icon">  
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="../assets/css/styles.css" rel="stylesheet" />
+        <link href="assets/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <h6 class="navbar-brand ps-3" style="color :#AF06B8 " href="home.php"><img src="../assets/img/Rilo.png" class="img-fluid rounded-circle me-2" style="height : 35px; padding-right : 1px; padding-bottom:1px;">RILO</h6>
+            <h6 class="navbar-brand ps-3" style="color :#AF06B8 " href="home.php"><img src="./assets/img/Rilo.png" class="img-fluid rounded-circle me-2" style="height : 35px; padding-right : 1px; padding-bottom:1px;">RILO</h6>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>            
             <!-- Navbar-->
@@ -123,9 +89,9 @@ if(isset($_GET['idPesanan'])) {
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                      <h4 class="mt-4" style="color : #4F06B8;">Detail Pesanan</h4>
+                      <h4 class="mt-4" style="color : #4F06B8;">Update Kategori Menu</h4>
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted mb-4">Struk Digital</div>
+                            <div class="text-muted mb-4">Update Kategori Menu</div>
                         </div>
                         
         <!-- Page Wrapper -->
@@ -135,85 +101,14 @@ if(isset($_GET['idPesanan'])) {
         <div class="row justify-content-md-center">
         <div class="col col-lg-13">
 
-        <form action="pembayaran.php?idPesanan=<?php echo $idPesanan ?>" method="POST" class="portlet light bordered">
-                
-                <!-- <div class="input-group input-group-outline mb-3">
+        <form action="data.php" method="POST" >
+                <div class="input-group input-group-outline mb-3">
                   <label class="form-label"></label>
-                  <input type="text" name="idPembeli" id="" class="form-control" placeholder="" value="<?= $recPembeli['idPembeli'] ?>">
-              </div>    -->
-                <div class="input-group input-group-outline mb-3">
-                  <label class="control-label col-md-3">Tanggal Pesanan: </label>
-                  <p class="form-control-static"><?= $recPesanan['tanggalPesanan'] ?></p>
+                  <input type="text" name="namaKategori" id="namaKategori" class="form-control" value="<?= $recKategoriMenu['namaKategori'] ?>">
                 </div>
-                <div class="input-group input-group-outline mb-3">
-                    <?php 
-                        $dkat = mysqli_query($con,"SELECT * FROM pembeli WHERE idPembeli = '$idPembeli'");
-                        while ($bkat= mysqli_fetch_array($dkat)){
-                    ?>
-                    <label class="control-label col-md-3">Nama Pemesan: </label>
-                    <p class="form-control-static"><?= $bkat['nama_pembeli'] ?></p>
-                    <?php } ?>
-                    <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</p>
-                    <?php 
-                        $dkat = mysqli_query($con,"SELECT * FROM pelayan WHERE idPelayan = '$idPelayan'");
-                        while ($bkat= mysqli_fetch_array($dkat)){
-                    ?>
-                        <label class="control-label col-md-3">Nama Pelayan: </label>
-                        <p class="form-control-static"><?= $bkat['nama'] ?></p>
-                        </div>
-                    <?php } ?>
-                </div>
-                <div class="input-group input-group-outline mb-3">
-                    <?php 
-                        $dkat = mysqli_query($con,"SELECT * FROM menu WHERE idMenu = '$idMenu'");
-                        while ($bkat= mysqli_fetch_array($dkat)){
-                    ?>
-                      <label class="control-label col-md-3">Menu Dipesan: </label>
-                      <p class="form-control-static"><?= $bkat['namaMenu'] ?> &ensp; / &ensp; Rp. <?= $bkat['Harga'] ?></p>
-                    <?php } ?>
-                    <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</p>
-                    <?php 
-                        $dkat = mysqli_query($con,"SELECT * FROM detailpesanan WHERE idPesanan = '$idPesanan'");
-                        while ($bkat= mysqli_fetch_array($dkat)){
-                    ?>
-                      <label class="control-label col-md-3">Quantity: </label>
-                      <p class="form-control-static"><?= $bkat['quantity'] ?></p>
-                    <?php } ?>
-                </div>
-                <?php 
-                    $dkat = mysqli_query($con,"SELECT * FROM detailpesanan WHERE idPesanan = '$idPesanan'");
-                    while ($bkat= mysqli_fetch_array($dkat)){
-                ?>
-                <div class="input-group input-group-outline mb-3">
-                  <label class="control-label col-md-3">Total Harga: </label>
-                  <p class="form-control-static">Rp. <?= $bkat['hargaSatuan'] ?></p>
-                </div>
-                <?php } ?>
-                <div class="input-group input-group-outline mb-3">
-                    <label class="form-label"></label>
-                    <select name="idMetodePembayaran" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" autofocus>
-                        <option selected>Pilih Metode Pembayaran</option>
-                        <?php 
-                            $dkat = mysqli_query($con,"SELECT * FROM metodepembayaran ORDER BY metodePembayaran ASC");
-                            while ($bkat= mysqli_fetch_array($dkat)){
-                        ?>
-                        <option value="<?php echo $bkat['idMetodePembayaran'] ?>"><?php echo $bkat['metodePembayaran']  ?></option>
-                        <?php } ?>
-                    </select>
-                </div>
-                <div class="input-group input-group-outline mb-3">
-                    <label class="form-label"></label>
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Rp.</span>
-                    </div>
-                    <input id="bayar" type="text" class="form-control" name="bayar" placeholder="Nominal Bayar" style="width: 75px;" autofocus>
-                </div>
-                <input type="hidden" name="idPesanan" value="<?= $recPesanan['idPesanan'] ?>" />
+                <input type="hidden" name="idKategoriMenu" value="<?= $recKategoriMenu['idKategoriMenu'] ?>" />
 
-                <input type="submit" style="background-color : #4F06B8;" class="btn float-end text-white" name="btnSimpanPembayaran" value="Update Pembeli" >
-                </form>
-                <form action="../Pesanan/editpesanan.php?idPesanan=<?= $recPesanan['idPesanan'] ?>" method="POST">
-                <input type="submit" style="background-color : #4F06B8;" class="btn float-end text-white" action="" value="Edit Pesanan" >
+                <input type="submit" style="background-color : #4F06B8;" class="btn float-end text-white" name="UpKategoriMenu" value="Update Kategori Menu" >
                 </form>
             </div>
         </div>
@@ -286,7 +181,7 @@ if(isset($_GET['idPesanan'])) {
 
    <!-- script -->
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<script src="../assets/js/scripts.js"></script>
+<script src="js/scripts.js"></script>
 <!-- end script -->
 </body>
 
